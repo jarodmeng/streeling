@@ -1,6 +1,6 @@
 baseurl = "/"
 title = "Streeling"
-theme = "ghostwriter"
+theme = "ghostwriter2"
 languageCode = "en-us"
 copyright = "Jarod G.R. Meng"
 disqusShortname = ""
