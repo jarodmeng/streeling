@@ -260,6 +260,25 @@ for (k in seq(100, 1000, 1)) {
 
 It takes `r 609-497` more tries for the probability to get to 80%. Similarly, we can compute that it takes 754 tries for the probability to reach 95%.
 
+We can use simulation to confirm if the probability formula is correct.
+
+```{r}
+Sim <- function(n, k) {
+  S <- seq(1, n, 1)
+  sims <- replicate(1000, sample(S, k, replace = TRUE), simplify = FALSE)
+  sum(sapply(sims, function(x) length(setdiff(S, x)) == 0))/1000
+}
+
+Sim_100 <- function(k) {
+  sapply(k, function(k) Sim(100, k))
+}
+
+curve(Pr_100, from = 100, to = 1000, xlab = "k", ylab = "Pr(100,k)")
+curve(Sim_100, from = 100, to = 1000, n = 200, col = "red", add = TRUE)
+```
+
+The simulation produces very simliar probability curve to the probability function.
+
 Now it becomes a collective bargaining problem. All prisoners need to agree on a particular probability threshold and compute the necessary tries to get to that probability. If they assume that the warden only takes one prisoner every day, then the number of tries equals the number of days they need to wait before someone makes the assertion and all hope for the best.
 
 [1]:https://en.wikipedia.org/wiki/Multiset#Counting_multisets
