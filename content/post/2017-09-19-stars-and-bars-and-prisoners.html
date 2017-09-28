@@ -23,20 +23,20 @@ slug: stars-and-bars-and-prisoners
 <h2>Combination</h2>
 <p>Since the order of the prisoners doesn’t matter, the problem is a <a href="https://en.wikipedia.org/wiki/Combination">combination</a> question. In conventional combinations, the number of <span class="math inline">\(k\)</span>-combinations of a <span class="math inline">\(n\)</span>-element set (<span class="math inline">\(k \leq n\)</span>) is equal to the binomial coefficient <span class="math inline">\({{n}\choose{k}} = \frac{n!}{k!(n-k)!} = \frac{n(n-1)...(n-k+1)}{k(k-1)...1}\)</span>. For example, there are <span class="math inline">\({{3}\choose{2}} = \frac{3 \times 2}{2 \times 1} = 3\)</span> ways to choose a 2-element tuple from a 3-element set <span class="math inline">\(\{A, B, C\}\)</span>, namely <span class="math inline">\((A, B)\)</span>, <span class="math inline">\((A, C)\)</span>, and <span class="math inline">\((B, C)\)</span>.</p>
 <p>Conventional combinations are drawn without repetition. The 3 tuples in the previous example are all unique sets. However, in our prisoner problem, the same prisoner can be taken more than once, so the binomial coefficient doesn’t seem to apply here.</p>
-<p>What I need here is a way to <a href="https://en.wikipedia.org/wiki/Multiset#Counting_multisets">count multisets</a>. Formally, the number of multisets of cardinality <span class="math inline">\(k\)</span>, with elements taken from a finite set of cardinality <span class="math inline">\(n\)</span>, is the multiset coefficient, written as <span class="math inline">\(\left(\!\!{n\choose k}\!\!\right)\)</span>.</p>
+<p>What we need here is a way to <a href="https://en.wikipedia.org/wiki/Multiset#Counting_multisets">count multisets</a>. Formally, the number of multisets of cardinality <span class="math inline">\(k\)</span>, with elements taken from a finite set of cardinality <span class="math inline">\(n\)</span>, is the multiset coefficient, written as <span class="math inline">\(\left(\!\!{n\choose k}\!\!\right)\)</span>.</p>
 <p>The value of multiset coefficient can be computed using an equivalent binomial coefficient.</p>
 <p><span class="math display">\[\left(\!\!{n\choose k}\!\!\right) = {{n+k-1}\choose{k}} = \frac{(n+k-1)!}{k!(n-1)!}\]</span></p>
 <p>To see this equivalence, one can use a simple technique called <a href="https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)">stars and bars</a>.</p>
 <p>Suppose 3 elements are drawn with repetition from the set <span class="math inline">\({1,2}\)</span> of cardinality 2 (<span class="math inline">\(n=2, k=3\)</span>). It’s not difficult to enumerate all possible multisets because there are only 4 of them: <span class="math inline">\(\{1,1,1\}\)</span>, <span class="math inline">\(\{1,1,2\}\)</span>, <span class="math inline">\(\{1,2,2\}\)</span>, and <span class="math inline">\(\{2,2,2\}\)</span>.</p>
-<p>I can also represent those multisets in another form.</p>
+<p>We can also represent those multisets in another form.</p>
 <p><span class="math inline">\(\{{\bullet}{\bullet}{\bullet}|\}\)</span>, <span class="math inline">\(\{{\bullet}{\bullet}|{\bullet}\}\)</span>, <span class="math inline">\(\{{\bullet}|{\bullet}{\bullet}\}\)</span>, and <span class="math inline">\(\{|{\bullet}{\bullet}{\bullet}\}\)</span></p>
 <p>In this form, all elements are denoted as a dot. Vertical bars are put to divide the dots into bins, with each bin representing an element from the unique set. It’s possible to have a bin with no elements which basically means that the particular unique element doesn’t have any corresponding elements in the multiset (e.g., the first multiset doesn’t have element <span class="math inline">\(2\)</span> and the last multiset doesn’t have <span class="math inline">\(1\)</span>).</p>
-<p>One needs <span class="math inline">\(n-1\)</span> bars to represent a unique set of cardinality <span class="math inline">\(n\)</span>. If I count the total number of dots and bars in a <span class="math inline">\(k\)</span>-element multiset, it’s <span class="math inline">\(k+n-1\)</span>. Then the total number of possible <span class="math inline">\(k\)</span>-element multisets equals to the total number of ways of placing <span class="math inline">\(n-1\)</span> bars in <span class="math inline">\(k+n-1\)</span> items, which is <span class="math inline">\({{k+n-1}\choose{n-1}} = {{k+n-1}\choose{k}}\)</span>.</p>
+<p>One needs <span class="math inline">\(n-1\)</span> bars to represent a unique set of cardinality <span class="math inline">\(n\)</span>. If we count the total number of dots and bars in a <span class="math inline">\(k\)</span>-element multiset, it’s <span class="math inline">\(k+n-1\)</span>. Then the total number of possible <span class="math inline">\(k\)</span>-element multisets equals to the total number of ways of placing <span class="math inline">\(n-1\)</span> bars in <span class="math inline">\(k+n-1\)</span> items, which is <span class="math inline">\({{k+n-1}\choose{n-1}} = {{k+n-1}\choose{k}}\)</span>.</p>
 </div>
 <div id="the-denominator" class="section level2">
 <h2>The denominator</h2>
-<p>Let’s return to the original question. What’s the probability of all prisoners being taken to the room at least once after the warden takes <span class="math inline">\(k\)</span> times? To compute this probability, I need to compute the total number of possible scenarios which will serve as the denominator.</p>
-<p>The total number should equal to <span class="math inline">\(\left(\!\!{n\choose k}\!\!\right)\)</span>, for a <span class="math inline">\(k \geq n\)</span>. From the previous section, I can work out <span class="math inline">\(\left(\!\!{n\choose k}\!\!\right) = {{k+n-1}\choose{k}}\)</span>.</p>
+<p>Let’s return to the original question. What’s the probability of all prisoners being taken to the room at least once after the warden takes <span class="math inline">\(k\)</span> times? To compute this probability, We need to compute the total number of possible scenarios which will serve as the denominator.</p>
+<p>The total number should equal to <span class="math inline">\(\left(\!\!{n\choose k}\!\!\right)\)</span>, for a <span class="math inline">\(k \geq n\)</span>. From the previous section, We can work out <span class="math inline">\(\left(\!\!{n\choose k}\!\!\right) = {{k+n-1}\choose{k}}\)</span>.</p>
 </div>
 <div id="the-numerator" class="section level2">
 <h2>The numerator</h2>
@@ -44,22 +44,22 @@ slug: stars-and-bars-and-prisoners
 </div>
 <div id="the-probability" class="section level2">
 <h2>The probability</h2>
-<p>Once I have both the denominator and numerator, the probability is straightforward to compute.</p>
+<p>Once we have both the denominator and numerator, the probability is straightforward to compute.</p>
 <p><span class="math display">\[Pr(n,k) = \frac{{{k-1}\choose{n-1}}}{{{k+n-1}\choose{k}}} = \frac{\frac{(k-1)!}{(n-1)! \cdot (k-n)!}}{\frac{(k+n-1)!}{k! \cdot (n-1)!}} = \frac{k!(k-1)!}{(k+n-1)!(k-n)!}\]</span></p>
 <p>In our case, <span class="math inline">\(n=100\)</span>, so</p>
 <p><span class="math display">\[Pr(100,k) = \frac{k!(k-1)!}{(k+99)!(k-100)!}\]</span></p>
-<p>I can plot this probability function for <span class="math inline">\(100 \leq k \leq 200\)</span>.</p>
+<p>We can plot this probability function for <span class="math inline">\(100 \leq k \leq 200\)</span>.</p>
 <pre class="r"><code>Pr &lt;- function(k) {
   choose(k-1, 99)/choose(k+99, k)
 }
 curve(Pr, from = 100, to = 200, xlab = &quot;k&quot;, ylab = &quot;Pr(100,k)&quot;)</code></pre>
 <p><img src="/post/2017-09-19-stars-and-bars-and-prisoners_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>The plot shows that the probability of getting all prisoners at least once even after the warden takes 200 times is so slim that it’s practically 0.</p>
-<p>I can extend the possible <span class="math inline">\(k\)</span> values.</p>
+<p>We can extend the possible <span class="math inline">\(k\)</span> values.</p>
 <pre class="r"><code>curve(Pr, from = 100, to = 30000, xlab = &quot;k&quot;, ylab = &quot;Pr(100,k)&quot;)</code></pre>
 <p><img src="/post/2017-09-19-stars-and-bars-and-prisoners_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>For the probability to reach 10%, the warden needs to take nearly 5,000 times. The probability increases a bit faster once <span class="math inline">\(k\)</span> exceeds 5,000, but it still takes about 10,000 times before it gets near 40%.</p>
-<p>I can also find out the minimum <span class="math inline">\(k\)</span> that makes the probability greater than 50% (i.e., better than a coin flip).</p>
+<p>We can also find out the minimum <span class="math inline">\(k\)</span> that makes the probability greater than 50% (i.e., better than a coin flip).</p>
 <pre class="r"><code>for (k in seq(100, 30000, 1)) {
   if (Pr(k) &gt;= 0.5) {
     print(paste0(&quot;It takes &quot;, k, &quot; times for the probability to reach 50%.&quot;))
@@ -140,20 +140,20 @@ curve(Pr, from = 100, to = 200, xlab = &quot;k&quot;, ylab = &quot;Pr(100,k)&quo
 </tbody>
 </table>
 <p>It’s easy to see that among the 10 combinations, only one set, (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>), includes all 3 unique elements. So the probability is simply <span class="math inline">\(1/10 = 0.1\)</span>.</p>
-<p>Alternatively, I can simply plug in <span class="math inline">\(n=3, k=3\)</span> into the formula.</p>
+<p>Alternatively, we can simply plug in <span class="math inline">\(n=3, k=3\)</span> into the formula.</p>
 <p><span class="math display">\[Pr(3,3) = \frac{3!(3-1)!}{(3+3-1)!(3-3)!} = \frac{3!2!}{5!0!} = \frac{3 \times 2 \times 1 \times 2 \times 1}{5 \times 4 \times 3 \times 2 \times 1} = \frac{12}{120} = 0.1\]</span></p>
-<p>Is the probability really 10%? I can run a simulation to find out.</p>
+<p>Is the probability really 10%? We can run a simulation to find out.</p>
 <pre class="r"><code>n &lt;- 3
 k &lt;- 3
 S &lt;- LETTERS[1:n]
 sims &lt;- replicate(50000, sample(S, k, replace = TRUE), simplify = FALSE)
 (p &lt;- sum(sapply(sims, function(x) length(setdiff(S, x)) == 0))/50000)</code></pre>
-<pre><code>## [1] 0.22256</code></pre>
-<p>The simulation suggests that 22.3% of the samples have all 3 unique elements in them. That’s a lot higher than the 10% I’ve computed.</p>
+<pre><code>## [1] 0.22368</code></pre>
+<p>The simulation suggests that 22.4% of the samples have all 3 unique elements in them. That’s a lot higher than the 10% that we’ve computed.</p>
 <p>This is because the combination that has all 3 elements is actually more likely to happen in permutations.</p>
 <p>The total number of 3-permutations (with repetition) from a 3-element unique set is <span class="math inline">\(3^3 = 27\)</span>. The total number of 3-permutations (without repetition) from the same set is <span class="math inline">\(3! = 3 \times 2 \times 1 = 6\)</span>. Therefore, the probability of a sample set having all 3 elements is <span class="math inline">\(6/27 \approx 22.2\%\)</span>.</p>
 <p>One can imagine a frequency multiplier for each one of the 10 possible 3-combinations. This multiplier tells how many permutations a particular combination has. If all combinations have the same multiplier, the probability formula using combination counts would be right. The simple example shows that this is not the case and the combination with all 3 elements must have a greater multiplier than average.</p>
-<p>In the table above, I list out all possible 3-combinations. I can also represent each combination by the number of unique elements it has and how many times each unique element occurrs. For example, in (<span class="math inline">\(A\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>), there are 2 unique elements <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. <span class="math inline">\(A\)</span> occurrs twice and <span class="math inline">\(B\)</span> once. Let’s denote each unique elements’s frequency in a combination <span class="math inline">\(m_j\)</span>. In the example, <span class="math inline">\(m_1 = 2\)</span> and <span class="math inline">\(m_2 = 1\)</span>.</p>
+<p>In the table above, we list out all possible 3-combinations. We can also represent each combination by the number of unique elements it has and how many times each unique element occurrs. For example, in (<span class="math inline">\(A\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>), there are 2 unique elements <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. <span class="math inline">\(A\)</span> occurrs twice and <span class="math inline">\(B\)</span> once. Let’s denote each unique elements’s frequency in a combination <span class="math inline">\(m_j\)</span>. In the example, <span class="math inline">\(m_1 = 2\)</span> and <span class="math inline">\(m_2 = 1\)</span>.</p>
 <p>One can show that the number of permutations (aka the frequency multiplier) of a <span class="math inline">\(m\)</span>-element combination is <span class="math inline">\(\frac{m!}{m_1! \cdot m_2! \cdot ... \cdot m_j!}\)</span>, where <span class="math inline">\(\sum{m_j}=m\)</span></p>
 <p>It’s clear from this formula why the combination having all 3 elements has the greatest frequency multiplier. All combinations have the same numerator <span class="math inline">\(m!\)</span> while the combination having all 3 elements has the lowest denominator.</p>
 <p>This makes me think that our probability formula is vastly underestimating the actual probability. The prisoners might have a shot at this game after all.</p>
@@ -174,4 +174,42 @@ sims &lt;- replicate(50000, sample(S, k, replace = TRUE), simplify = FALSE)
 <p>For example, when <span class="math inline">\(n=3\)</span> and <span class="math inline">\(k=3\)</span>,</p>
 <p><span class="math display">\[\sum_{j=0}^{3} (-1)^{j} (3-j)^3 {{3}\choose{j}}\]</span> <span class="math display">\[=3^3 - 2^3{{3}\choose{1}} + 1^3{{3}\choose{2}} - 0 = 27 - 8 \cdot 3 + 1 \cdot 3 = 6\]</span></p>
 <p>Now we have both the numerator and denominator, we can compute the probability function.</p>
+<p><span class="math display">\[Pr(n,k) = \frac{\sum_{j=0}^{n} (-1)^{j} (n-j)^k {{n}\choose{j}}}{n^k}\]</span> <span class="math display">\[=\sum_{j=0}^{n} (-1)^{j} (\frac{n-j}{n})^k {{n}\choose{j}}\]</span></p>
+<p>We can now plot the probability function for <span class="math inline">\(n=100\)</span> and <span class="math inline">\(100 \leq k \leq 200\)</span>.</p>
+<pre class="r"><code>Pr &lt;- function(n, k) {
+  out &lt;- vector(&quot;numeric&quot;, n+1)
+  for (j in seq(0, n, 1)) {
+    out[j+1] &lt;- (-1)^j * ((n-j)/n)^k * choose(n, j)
+  }
+  max(0, sum(out))
+}
+
+Pr_100 &lt;- function(k) {
+  sapply(k, function(k) Pr(100, k))
+}
+
+curve(Pr_100, from = 100, to = 200, xlab = &quot;k&quot;, ylab = &quot;Pr(100, k)&quot;)</code></pre>
+<p><img src="/post/2017-09-19-stars-and-bars-and-prisoners_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The probability of getting all prisoners taken at least once after 200 times is still very slim and effectively 0. What about higher <span class="math inline">\(k\)</span> values?</p>
+<pre class="r"><code>curve(Pr_100, from = 100, to = 1000, xlab = &quot;k&quot;, ylab = &quot;Pr(100,k)&quot;)</code></pre>
+<p><img src="/post/2017-09-19-stars-and-bars-and-prisoners_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Now we see that the probability starts to increase fairly quickly when <span class="math inline">\(k\)</span> exceeds 400. It also reaches its peak roughly when <span class="math inline">\(k\)</span> approaches 800.</p>
+<p>We can also compute the minimum <span class="math inline">\(k\)</span> value for the probability to reach 50%.</p>
+<pre class="r"><code>for (k in seq(100, 1000, 1)) {
+  if (Pr_100(k) &gt;= 0.5) {
+    print(paste0(&quot;It takes &quot;, k, &quot; times for the probability to reach 50%.&quot;))
+    break
+  }
+}</code></pre>
+<pre><code>## [1] &quot;It takes 497 times for the probability to reach 50%.&quot;</code></pre>
+<p>It takes just shy of 500 times to get even odds. How about 80%?</p>
+<pre class="r"><code>for (k in seq(100, 1000, 1)) {
+  if (Pr_100(k) &gt;= 0.8) {
+    print(paste0(&quot;It takes &quot;, k, &quot; times for the probability to reach 80%.&quot;))
+    break
+  }
+}</code></pre>
+<pre><code>## [1] &quot;It takes 609 times for the probability to reach 80%.&quot;</code></pre>
+<p>It takes 112 more tries for the probability to get to 80%. Similarly, we can compute that it takes 754 tries for the probability to reach 95%.</p>
+<p>Now it becomes a collective bargaining problem. All prisoners need to agree on a particular probability threshold and compute the necessary tries to get to that probability. If they assume that the warden only takes one prisoner every day, then the number of tries equals the number of days they need to wait before someone makes the assertion and all hope for the best.</p>
 </div>
