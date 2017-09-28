@@ -28,7 +28,7 @@ ${{n}\choose{k}} = \frac{n!}{k!(n-k)!} = \frac{n(n-1)...(n-k+1)}{k(k-1)...1}$. F
 
 Conventional combinations are drawn without repetition. The 3 tuples in the previous example are all unique sets. However, in our prisoner problem, the same prisoner can be taken more than once, so the binomial coefficient doesn't seem to apply here.
 
-What I need here is a way to [count multisets][1]. Formally, the number of multisets of cardinality $k$, with elements taken from a finite set of cardinality $n$, is the multiset coefficient, written as $\left(\!\!{n\choose k}\!\!\right)$.
+What we need here is a way to [count multisets][1]. Formally, the number of multisets of cardinality $k$, with elements taken from a finite set of cardinality $n$, is the multiset coefficient, written as $\left(\!\!{n\choose k}\!\!\right)$.
 
 The value of multiset coefficient can be computed using an equivalent binomial coefficient.
 
@@ -38,19 +38,19 @@ To see this equivalence, one can use a simple technique called [stars and bars](
 
 Suppose 3 elements are drawn with repetition from the set ${1,2}$ of cardinality 2 ($n=2, k=3$). It's not difficult to enumerate all possible multisets because there are only 4 of them: $\{1,1,1\}$, $\{1,1,2\}$, $\{1,2,2\}$, and $\{2,2,2\}$.
 
-I can also represent those multisets in another form.
+We can also represent those multisets in another form.
 
 $\{{\bullet}{\bullet}{\bullet}|\}$, $\{{\bullet}{\bullet}|{\bullet}\}$, $\{{\bullet}|{\bullet}{\bullet}\}$, and $\{|{\bullet}{\bullet}{\bullet}\}$
 
 In this form, all elements are denoted as a dot. Vertical bars are put to divide the dots into bins, with each bin representing an element from the unique set. It's possible to have a bin with no elements which basically means that the particular unique element doesn't have any corresponding elements in the multiset (e.g., the first multiset doesn't have element $2$ and the last multiset doesn't have $1$).
 
-One needs $n-1$ bars to represent a unique set of cardinality $n$. If I count the total number of dots and bars in a $k$-element multiset, it's $k+n-1$. Then the total number of possible $k$-element multisets equals to the total number of ways of placing $n-1$ bars in $k+n-1$ items, which is ${{k+n-1}\choose{n-1}} = {{k+n-1}\choose{k}}$.
+One needs $n-1$ bars to represent a unique set of cardinality $n$. If we count the total number of dots and bars in a $k$-element multiset, it's $k+n-1$. Then the total number of possible $k$-element multisets equals to the total number of ways of placing $n-1$ bars in $k+n-1$ items, which is ${{k+n-1}\choose{n-1}} = {{k+n-1}\choose{k}}$.
 
 ## The denominator
 
-Let's return to the original question. What's the probability of all prisoners being taken to the room at least once after the warden takes $k$ times? To compute this probability, I need to compute the total number of possible scenarios which will serve as the denominator.
+Let's return to the original question. What's the probability of all prisoners being taken to the room at least once after the warden takes $k$ times? To compute this probability, We need to compute the total number of possible scenarios which will serve as the denominator.
 
-The total number should equal to $\left(\!\!{n\choose k}\!\!\right)$, for a $k \geq n$. From the previous section, I can work out $\left(\!\!{n\choose k}\!\!\right) = {{k+n-1}\choose{k}}$.
+The total number should equal to $\left(\!\!{n\choose k}\!\!\right)$, for a $k \geq n$. From the previous section, We can work out $\left(\!\!{n\choose k}\!\!\right) = {{k+n-1}\choose{k}}$.
 
 ## The numerator
 
@@ -58,7 +58,7 @@ The numerator of the probability is the number of multisets in which all prisone
 
 ## The probability
 
-Once I have both the denominator and numerator, the probability is straightforward to compute.
+Once we have both the denominator and numerator, the probability is straightforward to compute.
 
 $$Pr(n,k) = \frac{{{k-1}\choose{n-1}}}{{{k+n-1}\choose{k}}} = \frac{\frac{(k-1)!}{(n-1)! \cdot (k-n)!}}{\frac{(k+n-1)!}{k! \cdot (n-1)!}} = \frac{k!(k-1)!}{(k+n-1)!(k-n)!}$$
 
@@ -66,7 +66,7 @@ In our case, $n=100$, so
 
 $$Pr(100,k) = \frac{k!(k-1)!}{(k+99)!(k-100)!}$$
 
-I can plot this probability function for $100 \leq k \leq 200$.
+We can plot this probability function for $100 \leq k \leq 200$.
 
 ```{r}
 Pr <- function(k) {
@@ -77,7 +77,7 @@ curve(Pr, from = 100, to = 200, xlab = "k", ylab = "Pr(100,k)")
 
 The plot shows that the probability of getting all prisoners at least once even after the warden takes 200 times is so slim that it's practically 0.
 
-I can extend the possible $k$ values.
+We can extend the possible $k$ values.
 
 ```{r}
 curve(Pr, from = 100, to = 30000, xlab = "k", ylab = "Pr(100,k)")
@@ -85,7 +85,7 @@ curve(Pr, from = 100, to = 30000, xlab = "k", ylab = "Pr(100,k)")
 
 For the probability to reach 10%, the warden needs to take nearly 5,000 times. The probability increases a bit faster once $k$ exceeds 5,000, but it still takes about 10,000 times before it gets near 40%.
 
-I can also find out the minimum $k$ that makes the probability greater than 50% (i.e., better than a coin flip).
+We can also find out the minimum $k$ that makes the probability greater than 50% (i.e., better than a coin flip).
 
 ```{r}
 for (k in seq(100, 30000, 1)) {
@@ -142,11 +142,11 @@ There are $\left(\!\!{3\choose 3}\!\!\right) = {{3+3-1}\choose{3}} = {{5}\choose
 
 It's easy to see that among the 10 combinations, only one set, ($A$, $B$, $C$), includes all 3 unique elements. So the probability is simply $1/10 = 0.1$.
 
-Alternatively, I can simply plug in $n=3, k=3$ into the formula.
+Alternatively, we can simply plug in $n=3, k=3$ into the formula.
 
 $$Pr(3,3) = \frac{3!(3-1)!}{(3+3-1)!(3-3)!} = \frac{3!2!}{5!0!} = \frac{3 \times 2 \times 1 \times 2 \times 1}{5 \times 4 \times 3 \times 2 \times 1} = \frac{12}{120} = 0.1$$
 
-Is the probability really 10%? I can run a simulation to find out.
+Is the probability really 10%? We can run a simulation to find out.
 
 ```{r}
 n <- 3
@@ -156,7 +156,7 @@ sims <- replicate(50000, sample(S, k, replace = TRUE), simplify = FALSE)
 (p <- sum(sapply(sims, function(x) length(setdiff(S, x)) == 0))/50000)
 ```
 
-The simulation suggests that `r paste0(round(p*100, 1), "%")` of the samples have all 3 unique elements in them. That's a lot higher than the 10% I've computed.
+The simulation suggests that `r paste0(round(p*100, 1), "%")` of the samples have all 3 unique elements in them. That's a lot higher than the 10% that we've computed.
 
 This is because the combination that has all 3 elements is actually more likely to happen in permutations.
 
@@ -164,7 +164,7 @@ The total number of 3-permutations (with repetition) from a 3-element unique set
 
 One can imagine a frequency multiplier for each one of the 10 possible 3-combinations. This multiplier tells how many permutations a particular combination has. If all combinations have the same multiplier, the probability formula using combination counts would be right. The simple example shows that this is not the case and the combination with all 3 elements must have a greater multiplier than average.
 
-In the table above, I list out all possible 3-combinations. I can also represent each combination by the number of unique elements it has and how many times each unique element occurrs. For example, in ($A$, $A$, $B$), there are 2 unique elements $A$ and $B$. $A$ occurrs twice and $B$ once. Let's denote each unique elements's frequency in a combination $m_j$. In the example, $m_1 = 2$ and $m_2 = 1$.
+In the table above, we list out all possible 3-combinations. We can also represent each combination by the number of unique elements it has and how many times each unique element occurrs. For example, in ($A$, $A$, $B$), there are 2 unique elements $A$ and $B$. $A$ occurrs twice and $B$ once. Let's denote each unique elements's frequency in a combination $m_j$. In the example, $m_1 = 2$ and $m_2 = 1$.
 
 One can show that the number of permutations (aka the frequency multiplier) of a $m$-element combination is $\frac{m!}{m_1! \cdot m_2! \cdot ... \cdot m_j!}$, where $\sum{m_j}=m$
 
@@ -206,6 +206,61 @@ $$\sum_{j=0}^{3} (-1)^{j} (3-j)^3 {{3}\choose{j}}$$
 $$=3^3 - 2^3{{3}\choose{1}} + 1^3{{3}\choose{2}} - 0 = 27 - 8 \cdot 3 + 1 \cdot 3 = 6$$
 
 Now we have both the numerator and denominator, we can compute the probability function.
+
+$$Pr(n,k) = \frac{\sum_{j=0}^{n} (-1)^{j} (n-j)^k {{n}\choose{j}}}{n^k}$$
+$$=\sum_{j=0}^{n} (-1)^{j} (\frac{n-j}{n})^k {{n}\choose{j}}$$
+
+We can now plot the probability function for $n=100$ and $100 \leq k \leq 200$.
+
+```{r}
+Pr <- function(n, k) {
+  out <- vector("numeric", n+1)
+  for (j in seq(0, n, 1)) {
+    out[j+1] <- (-1)^j * ((n-j)/n)^k * choose(n, j)
+  }
+  max(0, sum(out))
+}
+
+Pr_100 <- function(k) {
+  sapply(k, function(k) Pr(100, k))
+}
+
+curve(Pr_100, from = 100, to = 200, xlab = "k", ylab = "Pr(100, k)")
+```
+
+The probability of getting all prisoners taken at least once after 200 times is still very slim and effectively 0. What about higher $k$ values?
+
+```{r}
+curve(Pr_100, from = 100, to = 1000, xlab = "k", ylab = "Pr(100,k)")
+```
+
+Now we see that the probability starts to increase fairly quickly when $k$ exceeds 400. It also reaches its peak roughly when $k$ approaches 800.
+
+We can also compute the minimum $k$ value for the probability to reach 50%.
+
+```{r}
+for (k in seq(100, 1000, 1)) {
+  if (Pr_100(k) >= 0.5) {
+    print(paste0("It takes ", k, " times for the probability to reach 50%."))
+    break
+  }
+}
+```
+
+It takes just shy of 500 times to get even odds. How about 80%?
+
+```{r}
+for (k in seq(100, 1000, 1)) {
+  if (Pr_100(k) >= 0.8) {
+    print(paste0("It takes ", k, " times for the probability to reach 80%."))
+    break
+  }
+}
+```
+
+It takes `r 609-497` more tries for the probability to get to 80%. Similarly, we can compute that it takes 754 tries for the probability to reach 95%.
+
+Now it becomes a collective bargaining problem. All prisoners need to agree on a particular probability threshold and compute the necessary tries to get to that probability. If they assume that the warden only takes one prisoner every day, then the number of tries equals the number of days they need to wait before someone makes the assertion and all hope for the best.
 
 [1]:https://en.wikipedia.org/wiki/Multiset#Counting_multisets
 [2]:https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle
