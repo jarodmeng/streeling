@@ -25,9 +25,3 @@ params:
   description: "[There has to be] A place for futile thoughts and dismal sciences..."
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
-  highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
-  highlightjsLang:
-    - r
-    - yaml
-  highlightjsTheme: github
-  highlightjsVersion: 9.12.0
