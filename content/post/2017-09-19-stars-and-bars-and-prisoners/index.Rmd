@@ -68,11 +68,19 @@ $$Pr(100,k) = \frac{k!(k-1)!}{(k+99)!(k-100)!}$$
 
 We can plot this probability function for $100 \leq k \leq 200$.
 
+```{r include=FALSE}
+library(ggplot2)
+theme_set(theme_minimal())
+```
+
 ```{r}
 Pr <- function(k) {
   choose(k-1, 99)/choose(k+99, k)
 }
-curve(Pr, from = 100, to = 200, xlab = "k", ylab = "Pr(100,k)")
+ggplot() +
+  xlim(100, 200) +
+  geom_function(fun = Pr) +
+  labs(x = "k", y = "Pr(100, k)")
 ```
 
 The plot shows that the probability of getting all prisoners at least once even after the warden takes 200 times is so slim that it's practically 0.
@@ -80,7 +88,10 @@ The plot shows that the probability of getting all prisoners at least once even 
 We can extend the possible $k$ values.
 
 ```{r}
-curve(Pr, from = 100, to = 30000, xlab = "k", ylab = "Pr(100,k)")
+ggplot() +
+  xlim(100, 30000) +
+  geom_function(fun = Pr) +
+  labs(x = "k", y = "Pr(100, k)")
 ```
 
 For the probability to reach 10%, the warden needs to take nearly 5,000 times. The probability increases a bit faster once $k$ exceeds 5,000, but it still takes about 10,000 times before it gets near 40%.
@@ -222,13 +233,19 @@ Pr <- function(n, k) {
 Pr_100 <- function(k) {
   sapply(k, function(k) Pr(100, k))
 }
-curve(Pr_100, from = 100, to = 200, xlab = "k", ylab = "Pr(100, k)")
+ggplot() +
+  xlim(100, 200) +
+  geom_function(fun = Pr_100) +
+  labs(x = "k", y = "Pr(100, k)")
 ```
 
 The probability of getting all prisoners taken at least once after 200 times is still very slim and effectively 0. What about higher $k$ values?
 
 ```{r}
-curve(Pr_100, from = 100, to = 1000, xlab = "k", ylab = "Pr(100,k)")
+ggplot() +
+  xlim(100, 1000) +
+  geom_function(fun = Pr_100) +
+  labs(x = "k", y = "Pr(100, k)")
 ```
 
 Now we see that the probability starts to increase fairly quickly when $k$ exceeds 400. It also reaches its peak roughly when $k$ approaches 800.
@@ -260,16 +277,19 @@ It takes `r 609-497` more tries for the probability to get to 80%. Similarly, we
 We can use simulation to confirm if the probability formula is correct.
 
 ```{r}
-Sim <- function(n, k) {
+Sim <- function(k, n) {
   S <- seq(1, n, 1)
   sims <- replicate(1000, sample(S, k, replace = TRUE), simplify = FALSE)
   sum(sapply(sims, function(x) length(setdiff(S, x)) == 0))/1000
 }
-Sim_100 <- function(k) {
-  sapply(k, function(k) Sim(100, k))
+Sim_100 <- function(k, n) {
+  sapply(k, function(k) Sim(k, n))
 }
-curve(Pr_100, from = 100, to = 1000, xlab = "k", ylab = "Pr(100,k)")
-curve(Sim_100, from = 100, to = 1000, n = 200, col = "red", add = TRUE)
+ggplot() +
+  xlim(100, 1000) +
+  geom_function(fun = Pr_100) +
+  geom_function(fun = Sim_100, args = list(n = 100), color = "red") +
+  labs(x = "k", y = "Pr(100, k)")
 ```
 
 The simulation produces very simliar probability curve to the probability function.
