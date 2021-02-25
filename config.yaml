@@ -1,7 +1,7 @@
 baseurl: /
 languageCode: en-us
 title: Streeling
-theme: hugo-lithium
+theme: ghostwriter
 googleAnalytics: ''
 disqusShortname: ''
 ignoreFiles:
@@ -19,18 +19,15 @@ menu:
     - name: GitHub
       url: https://github.com/jarodmeng/streeling
 params:
+  mainSections:
+    - post
+  intro: true
+  description: "[There has to be] A place for futile thoughts and dismal sciences..."
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
-  description: \[There has to be\] A place for futile thoughts and dismal sciences...
-  favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r
     - yaml
   highlightjsTheme: github
   highlightjsVersion: 9.12.0
-  logo:
-    alt: Logo
-    height: 50
-    url: logo.png
-    width: 50
