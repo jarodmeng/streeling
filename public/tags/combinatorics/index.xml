@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>combinatorics on Streeling</title>
+    <link>/tags/combinatorics/</link>
+    <description>Recent content in combinatorics on Streeling</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="/tags/combinatorics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stars and bars and prisoners</title>
+      <link>/2017/09/19/stars-and-bars-and-prisoners/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/09/19/stars-and-bars-and-prisoners/</guid>
+      <description>One of my friends posted an interesting brain teaser on WeChat. It was in Mandarin, so here is a loose translation of the question.
+ Suppose there are 100 prisoners. All of them are in solitary confinement so they cannot talk to each other at all. The warden has designed a “game”. He prepares an empty room with only a lamp inside. The lamp is initially switched off. Each time he takes a single prisoner into the room.</description>
+    </item>
+    
+  </channel>
+</rss>
