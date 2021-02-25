@@ -36,7 +36,7 @@ $$\left(\!\!{n\choose k}\!\!\right) = {{n+k-1}\choose{k}} = \frac{(n+k-1)!}{k!(n
 
 To see this equivalence, one can use a simple technique called [stars and bars](https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)).
 
-Suppose 3 elements are drawn with repetition from the set ${1,2}$ of cardinality 2 ($n=2, k=3$). It's not difficult to enumerate all possible multisets because there are only 4 of them: $\{1,1,1\}$, $\{1,1,2\}$, $\{1,2,2\}$, and $\{2,2,2\}$.
+Suppose 3 elements are drawn with repetition from the set $\{1,2\}$ of cardinality 2 ($n=2, k=3$). It's not difficult to enumerate all possible multisets because there are only 4 of them: $\{1,1,1\}$, $\{1,1,2\}$, $\{1,2,2\}$, and $\{2,2,2\}$.
 
 We can also represent those multisets in another form.
 
