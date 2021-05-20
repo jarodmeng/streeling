@@ -1,0 +1,425 @@
+---
+title: "The journey of discovering four-of-a-kind in a standard deck of cards"
+author: "Jarod G.R. Meng"
+date: '2021-05-14'
+slug: the-journey-of-discovering-four-of-a-kind-in-a-standard-deck-of-cards
+categories: math
+tags:
+- combinatorics
+- probability
+description: ''
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>I was reading Prof David Pollard’s <a href="http://www.stat.yale.edu/~pollard/Courses/241.fall97/">Probability Theory with Applications</a>. <a href="http://www.stat.yale.edu/~pollard/Courses/241.fall97/Probability.pdf">Chapter 1</a> of the notes has a brief introduction of probability. Example 1.2 in the chapter asks a very simple question.</p>
+<blockquote>
+<p>What is the probability that a hand of 5 cards (from a standard deck) contains four-of-a-kind?</p>
+</blockquote>
+<p><a name="disjoint-technique"></a></p>
+<p>The technique Prof Pollard used to solve the problem is to break the <em>event</em> (that is, a hand of 5 cards contains four-of-a-kind) into <strong>disjoint symmetric</strong> pieces (i.e., subevents). The disjointedness indicates that those subevents cannot occur at the same time. The symmetry is not guaranteed (i.e., mutually exclusive subevents don’t necessarily occur at the same frequency or probability), but is usually present in many probability problems.</p>
+<p>A standard deck of cards has 13 ranks (i.e., from ace to king). Therefore there are 13 mutually exclusive subevents of having four-of-a-kind in 5 cards (i.e., four aces, four twos, …, up to four kings).</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind in 5-card hand})=\sum_{i=1}^{13} P(F_{i})
+\]</span></p>
+<p>where <span class="math inline">\(F_{i}\)</span> corresponds to a subevent of having a particular four-of-a-kind ranging from ace to king. Since those subevents are disjoint, the probability of the overall event is the sum of the probabilities of those subevents. Furthermore, in a standard deck, the probability of having a four-of-a-kind of any rank should be the same as any other rank, that is, <span class="math inline">\(P(F_1) = P(F_2) = ... = P(F_{13})\)</span>.</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind in 5-card hand}) = \sum_{i=1}^{13} P(F_{i}) = 13 \times P(F_1)
+\]</span></p>
+<p>Here we use <span class="math inline">\(P(F1)\)</span> as a placeholder. One can substitute it with any other subevent <span class="math inline">\(F_i\)</span>.</p>
+<p>We can further break the subevent <span class="math inline">\(F_1\)</span> (that is, having four aces in 5 cards) into 5 disjoint and symmetric sub-subevents. For a hand of a 5 cards to have 4 aces, there must be one other card that’s not an ace. This “residual” card can be at any position (i.e., from 1st to 5th) in the hand. Those 5 different positions constitute 5 disjoint sub-subevents. Conceptually it’s straightforward to deduce that those sub-subevents have the same probability of happening (i.e., symmetry).</p>
+<p><span class="math display">\[
+P(F_1) = \sum_{j=1}^{5} P(F_{1, j})
+\]</span></p>
+<p>where <span class="math inline">\(F_{1, j}\)</span> refers the sub-subevent whereby there are 4 aces and 1 residual card in a 5-card hand and the residual card is at the position <span class="math inline">\(j\)</span>.</p>
+<p>Since we’ve already established that <span class="math inline">\(P(F_{1,1}) = P(F_{1,2}) = P(F_{1,3}) = P(F_{1,4}) = P(F_{1,5})\)</span>, we can simplify the equation.</p>
+<p><span class="math display">\[
+P(F_1) = \sum_{j=1}^{5} P(F_{1, j}) = 5 \times P(F_{1, 1})
+\]</span></p>
+<p>We can now work out the probability of <span class="math inline">\(F_{1,1}\)</span> which corresponds to a particular chain of actions.</p>
+<ol style="list-style-type: decimal">
+<li>Draw a non-ace card from a standard deck</li>
+<li>Draw an ace from the rest of the deck</li>
+<li>Draw another ace from the rest of the deck</li>
+<li>Draw yet another ace from the rest of the deck</li>
+<li>Draw the final ace from the rest of the deck</li>
+</ol>
+<p><span class="math display">\[
+P(F_{1,1}) = P(A_1) \cdot P(A_2) \cdot P(A_3) \cdot P(A_4) \cdot P(A_5)
+\]</span></p>
+<p>where <span class="math inline">\(A_i\)</span> corresponds to the actions mentioned above in the numbered list.</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(A_1) = \frac{48}{52}\)</span> because there are 48 non-ace cards in the deck.</li>
+<li><span class="math inline">\(P(A_2) = \frac{4}{51}\)</span> because there are 4 aces in the rest of the deck which now has 51 cards.</li>
+<li><span class="math inline">\(P(A_3) = \frac{3}{50}\)</span> because there are now 3 aces in the remaining 50-card deck.</li>
+<li><span class="math inline">\(P(A_4) = \frac{2}{49}\)</span> because there are now 2 aces left in the remaining 49-card deck.</li>
+<li><span class="math inline">\(P(A_5) = \frac{1}{48}\)</span> because there’s only 1 ace left in the remaining 48-card deck.</li>
+</ol>
+<p>Therefore,</p>
+<p><span class="math display">\[
+P(F_{1,1}) = \frac{48}{52} \cdot \frac{4}{51} \cdot \frac{3}{50} \cdot \frac{2}{49} \cdot \frac{1}{48}
+\]</span></p>
+<p>Putting all these steps together, we can arrive at the final conclusion.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind in 5-card hand}) &amp;= \sum_{i=1}^{13} P(F_{i}) = 13 \times P(F_1) \\
+&amp;= 13 \times 5 \times P(F_{1, 1}) \\
+&amp;= 13 \times 5 \times \frac{48}{52} \cdot \frac{4}{51} \cdot \frac{3}{50} \cdot \frac{2}{49} \cdot \frac{1}{48} \\
+&amp;= \frac{1}{4165} \\
+&amp;\approx 0.00024
+\end{aligned}
+\]</span></p>
+<p>The probability is quite low. On average, there is only 1 such hand in 4,000+ hands.</p>
+<p>This reasoning emphasizes on breaking the event-of-interest into cascading mutually exclusive (i.e., disjoint) subevents (imagine a tree of subevents). Those subevents on the same level usually have symmetry among them so that only one of them is needed for subsequent steps.</p>
+<div id="an-alternative-approach" class="section level2">
+<h2>An alternative approach</h2>
+<p>The most straightforward (at least to me) approach of computing a probability is to count the number of scenarios that match the event-of-interest and the total number of possible scenarios.</p>
+<p><span class="math display">\[
+P(\text{event}) = \frac{\text{# of scenarios that match event}}{\text{total # of possible scenarios}}
+\]</span></p>
+<p>In this case, the event-of-interest is <em>having four-of-a-kind in a 5-card hand</em>. The total number of possible scenario (i.e., the denominator) is the total # of possible 5-card hands. This is easy to compute using combinatorics.</p>
+<p><span class="math display">\[
+\text{total # of 5-card hands} = \binom{52}{5} = \frac{52!}{5! \cdot 47!} = 2,598,960
+\]</span>
+A 5-card hand that contains four-of-a-kind can be thought of the combination of two elements.</p>
+<ol style="list-style-type: decimal">
+<li>Choose 1 rank from the total 13 ranks to the <em>kind</em> of the four-of-a-kind.</li>
+<li>Choose 1 residual card from the remaining deck after the four-of-a-kind has been drawn.</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\text{# of scenarios that match event} &amp;= \binom{13}{1} \times \binom{52-4}{5-4} \\
+&amp;= \binom{13}{1} \times \binom{48}{1} = 13 \times 48 = 624
+\end{aligned}
+\]</span></p>
+<p>There are 624 different 5-card hands that contain four-of-a-kind. So the probability of having four-of-a-kind in <em>any</em> 5-card hand is</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind in 5-card hand}) &amp;= \frac{\text{# of scenarios that match event}}{\text{total # of possible scenarios}} \\
+&amp;= \frac{624}{2,598,960} = \frac{1}{4165} \approx 0.00024
+\end{aligned}
+\]</span></p>
+</div>
+<div id="first-attempt-to-generalize" class="section level2">
+<h2>First attempt to generalize</h2>
+<p>After solving the initial question, I immediately wanted to know what if we change the number of cards in the hand. A natural candidate for the next enquiry is a 7-card hand (which is commonly used in games like Text Hold’em). Following the logic above, it’s very straightforward to compute the probability.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-kind in 7-card hand}) &amp;= \frac{\binom{13}{1} \cdot \binom{48}{3}}{\binom{52}{7}} 
+\\
+&amp;= \frac{13 \cdot \frac{48!}{3! \cdot 45!}}{\frac{52!}{7! \cdot 45!}} = \frac{13 \cdot 48! \cdot 7!}{3! \cdot 52!} \\
+&amp;= \frac{13 \cdot 7 \cdot 6 \cdot 5 \cdot 4}{52 \cdot 51 \cdot 50 \cdot 49} = \frac{1}{595} \approx 0.00168
+\end{aligned}
+\]</span>
+The probability of having four-of-a-kind has increased significantly from 0.024% to 0.17% as the extra 2 cards in the hand should help increase the chance of having a four-of-kind, but the overall probability is still very low (there’s a reason why four-of-a-kind is <a href="https://www.cardplayer.com/rules-of-poker/hand-rankings">a very strong hand</a> in Texas Hold’em).</p>
+<p>It’s tempting to generalize the formula.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-kind in n-card hand}) &amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} 
+\\
+&amp;= \frac{13 \cdot \frac{48!}{(n-4)! \cdot (52-n)!}}{\frac{52!}{n! \cdot (52-n)!}} \\
+&amp;= \frac{13 \cdot 48! \cdot n!}{(n-4)! \cdot 52!} \\
+&amp;= \frac{13 \cdot n \cdot (n-1) \cdot (n-2) \cdot (n-3)}{52 \cdot 51 \cdot 50 \cdot 49}
+\end{aligned}
+\]</span></p>
+<p>I plot the results of <span class="math inline">\(n\)</span> ranging from 0 to 28 below.</p>
+<p><a name="figure1"></a></p>
+<pre class="r"><code>prob1 &lt;- function(n) {
+  choose(13, 1) * choose(48, n-4) / choose(52, n)
+}
+df1 &lt;- tibble(
+  n = 0:52,
+  p = map_dbl(n, prob1)
+)
+df1 %&gt;% 
+  filter(n &lt;= 28) %&gt;%
+  ggplot(aes(x = n, y = p)) +
+    geom_point() +
+    geom_linerange(aes(ymin = 0, ymax = p)) +
+    scale_x_continuous(breaks = seq(0, 28, 1)) +
+    scale_y_continuous(label = percent)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Observations:</p>
+<ol style="list-style-type: decimal">
+<li>When <span class="math inline">\(n\)</span> is smaller than 4 (i.e., 0, 1, 2, or 3), the probability of having four-of-a-kind is 0. This should be so obvious since by definition four-of-a-kind requires 4 cards. The formula does produce 0 for <span class="math inline">\(n\)</span> smaller than 4 because <span class="math inline">\(n \cdot (n-1) \cdot (n-2) \cdot (n-3)\)</span> in the numerator equals 0 when <span class="math inline">\(n\)</span> is 0, 1, 2, or 3.</li>
+<li>The probability is a <strong>quartic function</strong> (i.e., a polynomial of degree four) of <span class="math inline">\(n\)</span>. When <span class="math inline">\(n\)</span> is small (such as 5), the probability is very small. But the probability increases very fast when <span class="math inline">\(n\)</span> increases.</li>
+</ol>
+<p>One thing I noticed on the chart is that the probability of having four-of-a-kind in a 28-card hand (i.e., the last point on the chart) is very close to 1. Given the quartic nature of the function, it is bound to exceed 1 when <span class="math inline">\(n\)</span> exceeds 28. In fact, <span class="math inline">\(P(29) = 1.14\)</span>. A more extreme case would be <span class="math inline">\(n=52\)</span>. Such a 52-card hand is basically the whole deck and the probability of having four-of-kind in the hand is 1. But according to the formula, <span class="math inline">\(P(52) = 13\)</span> which is much greater than 1 and doesn’t make sense.</p>
+<div id="duplication-and-overcounting" class="section level3">
+<h3>Duplication and overcounting</h3>
+<p>So apparently the generalized formula is wrong, or at least no applicable to all possible <span class="math inline">\(n\)</span> values. The trouble is duplication of scenarios which results in overcounting and overestimation of the probability.</p>
+<p>To see this, take the case whereby <span class="math inline">\(n=8\)</span>.</p>
+<p><a name="twostep"></a></p>
+<p>The numerator is computed as <span class="math inline">\(\binom{13}{1} \cdot \binom{52-4}{n-4} = \binom{13}{1} \cdot \binom{48}{4} = 2,529,540\)</span>. This can be thought as a 2-step process. (i), 4 cards of a kind are drawn. Since there are 13 ranks in a deck, there are <span class="math inline">\(\binom{13}{1} = 13\)</span> ways of drawing those 4 cards. (ii), next <span class="math inline">\(n-4=4\)</span> cards are drawn from the rest of the deck which now has <span class="math inline">\(52-4=48\)</span> cards. There are <span class="math inline">\(\binom{48}{4} = 194,580\)</span> ways to draw those 4 residual cards. Those two steps are independent of each other, so the total number of scenarios is the product of those two <span class="math inline">\(13 \times 194,580 = 2,529,540\)</span>.</p>
+<p><span class="math display">\[
+P(8) = \frac{2,529,540}{\binom{52}{8}} = \frac{2,529,540}{752,538,150} = \frac{2}{595} \approx 0.0033613
+\]</span></p>
+<p>This logic is flawed because there are actually duplication of the same scenarios. For example, let’s say ace is the rank drawn in the first step. That is, the first step draws 4 aces from the deck. When one draws another 4 cards from the rest of the deck, it’s possible to draw another four-of-a-kind (albeit a different kind than ace). In fact, there are <span class="math inline">\(\binom{12}{1} = 12\)</span> ways to draw another four-of-a-kind in the second step. Drawing 4 aces in the first step and drawing 4 twos in the second step makes the 8-card hand <span class="math inline">\(\{ace, ace, ace, ace, 2, 2, 2, 2\}\)</span>. One can reverse the order of the two steps to reach the same hand (remember that the order of the cards in the hand doesn’t matter). If 4 twos are drawn in the first step and 4 aces are drawn in the second, the hand is <span class="math inline">\(\{2, 2, 2, 2, ace, ace, ace, ace\}\)</span> which is effectively the same hand. Therefore, there are some duplication of scenarios in the numerator <span class="math inline">\(2,529,540\)</span> and this duplication makes the probability higher than it really is.</p>
+<p>Now the question becomes how to quantify the duplication and correct the overcounting.</p>
+<p>For this particular case of <span class="math inline">\(n=8\)</span>. The duplication occurs when two four-of-a-kind sets are drawn in different orders in the two-step process (i.e., aces before twos vs. twos before aces). There are 13 ways to draw the first four-of-a-kind and for each of those four-of-a-kind, there are 12 ways to draw the second four-of-a-kind, so there are in total <span class="math inline">\(13 \times 12 = 156\)</span> scenarios that have two four-of-a-kind sets in the numerator. Since there are only two sets of four-of-a-kind, the duplication is precisely double-counting (i.e., aces-and-twos and twos-and-aces are the same). So to correct for the duplication, I need to subtract <span class="math inline">\(156/2=78\)</span> scenarios from the numerator.</p>
+<p><span class="math display">\[
+P_{\text{corrected}}(8) = \frac{2,529,540-78}{\binom{52}{8}} = \frac{2,529,462}{752,538,150} \approx 0.0033612
+\]</span></p>
+<p>The corrected probability is very close to the previous one because the magnitude of the duplication is very limited (i.e., 78 scenarios in 2.5+ million).</p>
+</div>
+</div>
+<div id="second-attempt-to-generalize" class="section level2">
+<h2>Second attempt to generalize</h2>
+<p>In the previous section I took the approach of subtracting duplicated scenarios from total number of scenarios (which is computed using the <a href="#twostep">two-step process</a>) to arrive at the right probability of having four-of-a-kind in an 8-card hand. So naturally I wanted to explore the possibility of generalizing this approach to any <span class="math inline">\(n \in [0, 52]\)</span>.</p>
+<p>To recap, I have solved the probability of having four-of-a-kind in three situations so far.</p>
+<ol style="list-style-type: decimal">
+<li>When <span class="math inline">\(0 \leq n \leq 3\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = 0\)</span>.</li>
+<li>When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}\)</span>.</li>
+<li>When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}\)</span></li>
+</ol>
+<p>My <a href="#first-attempt-to-generalize">first attempt</a> to generalize only works in the second case. When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(0 \leq n-4 \leq 3\)</span> and there are no four-of-a-kind in all <span class="math inline">\(\binom{48}{n-4}\)</span> residual card scenarios (hence no risk of duplication and overcounting). Conveniently most poker hands (e.g., 5-card hand and 7-card hand) are within this case and the naive generalized formula works just fine.</p>
+<p>The formula in the third case above builds upon the naive generalized formula by correcting the numerator (i.e., subtracting the number of duplicated scenarios). The correction term <span class="math inline">\(\binom{13}{2} \cdot \binom{44}{n-8}\)</span> is itself computed following a two-step logic. (i), there are <span class="math inline">\(\binom{13}{2} = 78\)</span> ways of drawing 2 sets of four-of-a-kind from 13 ranks included in a standard deck of cards. (ii), for each of those 78 combinations of 2 sets of four-of-a-kind, there are <span class="math inline">\(\binom{44}{n-8}\)</span> ways to draw the residual <span class="math inline">\(n-8\)</span> (remember that <strong>two</strong> sets of four-of-a-kind have been drawn) cards. Since all of those <span class="math inline">\(\binom{13}{2} \cdot \binom{44}{n-8}\)</span> scenarios appear twice in the naive generalied formula’s numerator <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span>, they need to be subtracted once to arrive at the right numerator. The reason why this corrected generalized formula only works for <span class="math inline">\(8 \leq n \leq 11\)</span> is that <span class="math inline">\(n-8 \geq 4\)</span> when <span class="math inline">\(n \geq 12\)</span> and it would incur more unaccounted duplication.</p>
+<p>My second attempt to generalize the formula for any <span class="math inline">\(n\)</span> focuses on finding a way to compute the duplication as <span class="math inline">\(n\)</span> increases and subtract them from the original numerator <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span>.</p>
+<p>If the double-counting problem (i.e., having 2 sets of four-of-a-kind) can be mitigated using the correction term <span class="math inline">\(\binom{13}{2} \cdot \binom{44}{n-8}\)</span>, it seems promising to modify it to <span class="math inline">\(\binom{13}{3} \cdot \binom{40}{n-12}\)</span> to correct for the triple-counting (i.e., having 3 sets of four-of-a-kind) problem.</p>
+<p>I use <span class="math inline">\(k\)</span> to represent the variable that corresponds to the maximum number of sets of four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand. It’s not difficult to deduce that <span class="math inline">\(k \in [0, \lfloor n/4 \rfloor]\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>When <span class="math inline">\(0 \leq n \leq 3\)</span>, <span class="math inline">\(k = \lfloor n/4 \rfloor = 0\)</span>.</li>
+<li>When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(k \in [0, \lfloor n/4 \rfloor] = [0, 1]\)</span>.</li>
+<li>When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(k \in [0, \lfloor n/4 \rfloor] = [0, 2]\)</span>.</li>
+<li>…</li>
+<li>When <span class="math inline">\(n = 52\)</span>, <span class="math inline">\(k \in [0, \lfloor n/4 \rfloor] = [0, 13]\)</span>.</li>
+</ol>
+<p>When <span class="math inline">\(k\)</span> sets of four-of-a-kind are possible in an <span class="math inline">\(n\)</span>-card hand, there are <span class="math inline">\(\binom{13}{k} \cdot \binom{52-4k}{n-4k}\)</span> scenarios of such unique <span class="math inline">\(n\)</span>-card hands. Each of those unique hand is included in the original <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span> <span class="math inline">\(k\)</span> times. So to correct the duplication, <span class="math inline">\((k-1) \cdot \binom{13}{k} \cdot \binom{52-4k}{n-4k}\)</span> scenarios need to be subtracted.</p>
+<p><span class="math display">\[
+P_{\text{corrected}}(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \sum\limits_{k=2}^{13} (k-1) \cdot \binom{13}{k} \cdot \binom{52-4k}{n-4k}}{\binom{52}{n}}
+\]</span></p>
+<p>I plot the results below using the new generalized formula.</p>
+<pre class="r"><code>prob2 &lt;- function(n) {
+  start = choose(13, 1) * choose(48, n-4)
+  correction = sum(
+    map_dbl(seq(2, 13, 1), ~(.x - 1) * choose(13, .x) * choose(52-4*.x, n-4*.x))
+  )
+  (start - correction) / choose(52, n)
+}
+df2 &lt;- tibble(
+  n = 0:52,
+  p = map_dbl(n, prob2)
+)
+df2 %&gt;%
+  filter(n &lt;= 28) %&gt;%
+  ggplot(aes(x = n, y = p)) +
+    geom_point() +
+    geom_linerange(aes(ymin = 0, ymax = p)) +
+    scale_x_continuous(breaks = seq(0, 28, 1)) +
+    scale_y_continuous(label = percent, limits = c(0, 0.6))</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Comparing this chart to <a href="#figure1">figure 1</a> shows some differences.</p>
+<ol style="list-style-type: decimal">
+<li>The corrections seem to have little impact on the probabilities when <span class="math inline">\(n\)</span> is small (i.e., $n ).</li>
+<li>For larger <span class="math inline">\(n\)</span>s, the corrections have material impact. <span class="math inline">\(P_{\text{corrected}}(28)\)</span> is close to 60% rather than 100%.</li>
+</ol>
+<p>I plot the two figures together to show the differences more clearly.</p>
+<pre class="r"><code>df1n2 &lt;- bind_rows(
+  mutate(df1, version = &quot;original&quot;),
+  mutate(df2, version = &quot;corrected&quot;)
+) %&gt;%
+  mutate(version = factor(version, levels = c(&quot;original&quot;, &quot;corrected&quot;)))
+df1n2 %&gt;%
+  filter(n &lt;= 28) %&gt;%
+  ggplot(aes(x = n, y = p)) +
+    geom_point(aes(color = version)) +
+    scale_x_continuous(breaks = seq(0, 28, 1)) +
+    scale_y_continuous(label = percent) +
+    theme(legend.position = &quot;top&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The differences are rather small when <span class="math inline">\(n \leq 20\)</span>. They start to emerge and quickly increase when <span class="math inline">\(n &gt; 20\)</span>. The shape of the corrected formula curve looks S-shape rather than quartic or exponential. In fact, if I expand the x-axis a bit to include <span class="math inline">\(n \in [29, 32]\)</span>, it shows that the corrected formula starts to produce lower probabilities.</p>
+<pre class="r"><code>df1n2 %&gt;%
+  filter(n &lt;= 32) %&gt;%
+  ggplot(aes(x = n, y = p)) +
+    geom_point(aes(color = version)) +
+    geom_hline(yintercept = 0, linetype = &quot;dashed&quot;) +
+    geom_hline(yintercept = 1, linetype = &quot;dashed&quot;) +
+    geom_vline(xintercept = 28, color = &quot;red&quot;, linetype = &quot;dashed&quot;) +
+    scale_x_continuous(breaks = seq(0, 32, 1)) +
+    scale_y_continuous(label = percent) +
+    theme(legend.position = &quot;top&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The area between the two black horizontal dashed lines are sensible probabilities (i.e., <span class="math inline">\([0, 1]\)</span>). The chart above shows that both the original formula and the corrected one produce probabilities outside of the sensible range. This means that neither formula is correct. The original formula <strong>overcounts</strong> and it seems that the corrected formula <strong>undercounts</strong> (or put it another way, it <strong>overcorrects</strong>).</p>
+<p>I take a closer look at the sum of correction terms <span class="math inline">\(\sum\limits_{k=2}^{13} (k-1) \cdot \binom{13}{k} \cdot \binom{52-4k}{n-4k}\)</span>. When <span class="math inline">\(k\)</span> is small, the correction term increases very quickly when <span class="math inline">\(n\)</span> increases because there are much more scenarios of <span class="math inline">\(k\)</span> sets of four-of-a-kind in a large <span class="math inline">\(n\)</span>-card hand. Then correction terms of different <span class="math inline">\(k\)</span> start to have large amount of duplication (e.g., 2 sets of four-of-a-kind vs. 3 sets of four-of-a-kind). Since duplication between correction terms are not accounted, the sum of correction terms <em>overcorrects</em> and make the probability result <em>underestimated</em>. Thus, in the attempt to correct duplication in the first term <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span>, I created another duplication problem in the correction terms. The problem is small when <span class="math inline">\(n\)</span> is small, but grows very quickly when <span class="math inline">\(n\)</span> increases (even pushed the probability below 0 when <span class="math inline">\(n=32\)</span>).</p>
+<p>The learning from the second attempt to generalize:</p>
+<ol style="list-style-type: decimal">
+<li>The true probability is probably between the original and the corrected formula.</li>
+<li>The correction (from the <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span> scenarios) approach is conceptually difficult because it’s hard to cleanly separate duplication to mutually exclusive collectively exhaustive (MECE) partitions.</li>
+</ol>
+<p><a name="second-attempt-learning"></a></p>
+<p>The learning prompted me to try out an approach of addition (i.e., enumeration of categories of scenarios) rather than subtraction (i.e., correction from original scenarios).</p>
+</div>
+<div id="simulation-results" class="section level2">
+<h2>Simulation results</h2>
+<p>Before I dive into my third attempt to generalize, I “computed” the probability result using simulations. This is a totally acceptable way of solving problems. Sometimes closed form formulas just can’t be found to solve a problem. Although it lacks the beauty of pure logical deduction, but it’s a very practical way of problem solving (or at least finding an approximate answer to the problem). Since the probability of four-of-a-kind should be very small when <span class="math inline">\(n\)</span> is small, I need to run the simulation a large number of times to get an accurate estimate (that’s really what it is, not an answer, but an estimate) of the probability.</p>
+<pre class="r"><code># create a standard deck
+create_a_deck &lt;- function(randomize = TRUE) {
+  ranks &lt;- c(
+    &quot;ace&quot; = 1L,
+    &quot;2&quot; = 2L,
+    &quot;3&quot; = 3L,
+    &quot;4&quot; = 4L,
+    &quot;5&quot; = 5L,
+    &quot;6&quot; = 6L,
+    &quot;7&quot; = 7L,
+    &quot;8&quot; = 8L,
+    &quot;9&quot; = 9L,
+    &quot;10&quot; = 10L,
+    &quot;jack&quot; = 11L,
+    &quot;queen&quot; = 12L,
+    &quot;king&quot; = 13L
+  )
+  suits &lt;- c(&quot;club&quot;, &quot;diamond&quot;, &quot;spade&quot;, &quot;heart&quot;)
+  R &lt;- length(ranks)
+  S &lt;- length(suits)
+  D &lt;- R*S
+  deck &lt;- vector(mode = &quot;list&quot;, length = D)
+  for (i in seq_along(suits)) {
+    for (j in seq_along(ranks)) {
+      id &lt;- (i-1) * R + j
+      deck[[id]] &lt;- list(
+        id = id,
+        suit = suits[i],
+        rank = ranks[j]
+      )
+    }
+  }
+  if (randomize) {
+    deck &lt;- deck[sample(1:D, replace = FALSE)]
+  }
+  return(deck)
+}</code></pre>
+<pre class="r"><code># function to draw n cards from a deck d
+draw_cards &lt;- function(d, n) {
+   d[sample(1:length(d), size = n, replace = FALSE)]
+}
+# test if a hand of cards had any four-of-a-kind
+has_foak &lt;- function(cards) {
+  any(table(map_int(cards, pluck, &quot;rank&quot;)) &gt;= 4)
+}
+# draw n cards and test if there are any four-of-a-kind in the hand
+one_draw &lt;- function(d, n) {
+  cards &lt;- draw_cards(d, n)
+  has_foak(cards)
+}</code></pre>
+<pre class="r"><code>ns &lt;- seq(0, 52, 1)
+sim_res &lt;- vector(mode = &quot;list&quot;, length = length(ns))
+deck &lt;- create_a_deck(randomize = FALSE)
+df.sim &lt;- cache_rds({
+  set.seed(42)
+  for (i in seq_along(ns)) {
+    sim_res[[i]]  &lt;- tibble(
+      n = ns[i],
+      p = mean(
+        simplify(
+          mclapply(
+            1:1e6,
+            function(x) { one_draw(d = deck, n = ns[i]) },
+            mc.cores = 8
+          )
+        )
+      )
+    )
+  }
+  bind_rows(sim_res)
+}, clean = FALSE)</code></pre>
+<p>Here I plot the simulation results for <span class="math inline">\(n \in [0. 53]\)</span>.</p>
+<pre class="r"><code>df.sim %&gt;%
+  ggplot(aes(x = n, y = p)) +
+    geom_point() +
+    geom_linerange(aes(ymin = 0, ymax = p)) +
+    scale_x_continuous(breaks = seq(0, 50, 5)) +
+    scale_y_continuous(label = percent)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The results are bounded within the <span class="math inline">\([0, 1]\)</span> range. The curve has an S-shape which make sense.</p>
+<ol style="list-style-type: decimal">
+<li>When <span class="math inline">\(n \leq 3\)</span>, the probability of having four-of-a-kind is 0.2</li>
+<li>When <span class="math inline">\(n\)</span> is small (i.e., <span class="math inline">\(4 \leq n \leq 10\)</span>), the probability of having four-of-a-kind is very small (i.e., close to 0) and increases very slowly.</li>
+<li>Once <span class="math inline">\(n\)</span> becomes large (i.e., <span class="math inline">\(n \geq 30\)</span>), it’s almost certain that a <span class="math inline">\(n\)</span>-card hand would include four-of-a-kind.</li>
+<li>When <span class="math inline">\(n \geq 40\)</span>, the probability of having four-of-a-kind becomes 1.</li>
+</ol>
+<p>Now that I have a empirical answer of the question, I embark on my third attempt to generalize to find a more precise answer.</p>
+</div>
+<div id="third-attempt-to-generalize" class="section level2">
+<h2>Third attempt to generalize</h2>
+<p>As mentioned at the end of <a href="#second-attempt-learning">the second attempt</a>, I change my approach from subtracting (i.e., correction) to building up MECE blocks. The key is to break the event-of-interest (i.e., having four-of-a-kind) into disjoint blocks (<a href="#disjoint-technique">a lesson I learned way earlier in this article</a>).</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + ... + P(\text{exactly 13 four-of-a-kind})
+\]</span></p>
+<div id="first-case-4-leq-n-leq-7" class="section level3">
+<h3>First case: <span class="math inline">\(4 \leq n \leq 7\)</span></h3>
+<p>When <span class="math inline">\(4 \leq n \leq 7\)</span>, there are at maximum exactly 1 four-of-a-kind in the hand. So <span class="math inline">\(P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind})\)</span>. Then I can use the <a href="#twostep">two-step approach</a> to solve the problem.</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}
+\]</span></p>
+<p>The numerator here is basically the original numerator. The result should be the same as the orignal formula and the corrected formula (note that there’s simply no correction needed when <span class="math inline">\(4 \leq n \leq 7\)</span>).</p>
+</div>
+<div id="second-case-8-leq-n-leq-11" class="section level3">
+<h3>Second case, <span class="math inline">\(8 \leq n \leq 11\)</span></h3>
+<p>This case is a bit more complicated than the first case. When <span class="math inline">\(8 \leq n \leq 11\)</span>, there are at maximum 2 sets of four-of-a-kind in the hand. Hence,</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind})
+\]</span></p>
+<p>I can work out the 2nd term <span class="math inline">\(P(\text{exactly 2 four-of-a-kind})\)</span> first using the same two-step approach.</p>
+<p><span class="math display">\[
+P(\text{exactly 2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\]</span></p>
+<p>I now turn my attention to the first term <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>.</p>
+<p><span class="math display">\[
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P&#39;(\text{exactly 1 four-of-a-kind})]
+\]</span></p>
+<p>where,</p>
+<p><span class="math display">\[
+P(\text{1 four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+P&#39;(\text{exactly 1 four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
+\]</span></p>
+<p><span class="math inline">\(P(\text{1 four-of-a-kind})\)</span> is the probability of having at least 1 four-of-a-kind. <span class="math inline">\(P&#39;(\text{exactly 1 four-of-a-kind})\)</span> is the probability of having exactly 1 four-of-a-kind in the remaining 48 cards when a kind has already been drawn (to form the previous 1 four-of-a-kind). When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand.</p>
+<p>Putting these all together:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind}) &amp;= P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 1 four-of-a-kind}) \\
+&amp;= P(\text{exactly 2 four-of-a-kind}) + P(\text{1 four-of-a-kind}) \cdot [1 - P&#39;(\text{exactly 1 four-of-a-kind})]\\
+&amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}] \\
+&amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} \\
+&amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4} + \binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\end{aligned}
+\]</span>
+Since <span class="math inline">\(\binom{13}{1} \cdot \binom{12}{1} = 2 \cdot \binom{13}{2}\)</span>, the formula can be simplified as</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\]</span></p>
+<p>This is basically the same formula as the corrected formula. I’ve arrived at the same conclusion as the second attempt to generalize for <span class="math inline">\(4 \leq n \leq 11\)</span> so far.</p>
+<pre class="r"><code>simple_prob &lt;- function(k, n, r) {
+  choose(r, k) * choose(4*r-4*k, n-4*k) / choose(4*r, n)
+}
+
+compute_has_foak &lt;- function(n, r) {
+  K &lt;- n %/% 4
+  if (K == 0) {
+    return(0)
+  }
+  res &lt;- vector(mode = &quot;numeric&quot;, length = K)
+  for (i in seq(K)) {
+    res[i] &lt;- simple_prob(i, n, r) * (1 - compute_has_foak(n-4*i, r-i))
+  }
+  sum(res)
+}</code></pre>
+<pre class="r"><code>df3 &lt;- tibble(
+  n = 0:28,
+  p1 = map_dbl(n, prob1),
+  p2 = map_dbl(n, prob2),
+  p3 = map_dbl(n, ~compute_has_foak(.x, r = 13))
+)
+df3 %&gt;%
+  pivot_longer(p1:p3, names_to = &quot;type&quot;, values_to = &quot;probability&quot;) %&gt;%
+  ggplot(aes(x = n, y = probability)) +
+    geom_point(aes(color = type)) +
+    scale_x_continuous(breaks = seq(0, 28, 1)) +
+    scale_y_continuous(label = percent)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
