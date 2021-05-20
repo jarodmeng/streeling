@@ -220,6 +220,8 @@ In the previous section I took the approach of subtracting duplicated scenarios 
 
 To recap, I have solved the probability of having four-of-a-kind in three situations so far.
 
+<a name="corrected-formula"></a>
+
 1. When $0 \leq n \leq 3$, $P(\text{four-of-a-kind}) = 0$.
 2. When $4 \leq n \leq 7$, $P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}$.
 3. When $8 \leq n \leq 11$, $P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}$
@@ -403,7 +405,7 @@ df.sim <- cache_rds({
 }, clean = FALSE)
 ```
 
-Here I plot the simulation results for $n \in [0. 53]$.
+Here I plot the simulation results for $n \in [0, 53]$.
 
 ```{r}
 df.sim %>%
@@ -414,9 +416,9 @@ df.sim %>%
     scale_y_continuous(label = percent)
 ```
 
-The results are bounded within the $[0, 1]$ range. The curve has an S-shape which make sense.
+The results are bounded within the $[0, 1]$ range. The curve has an S-shape which makes sense.
 
-1. When $n \leq 3$, the probability of having four-of-a-kind is 0.2
+1. When $n \leq 3$, the probability of having four-of-a-kind is 0.
 2. When $n$ is small (i.e., $4 \leq n \leq 10$), the probability of having four-of-a-kind is very small (i.e., close to 0) and increases very slowly.
 3. Once $n$ becomes large (i.e., $n \geq 30$), it's almost certain that a $n$-card hand would include four-of-a-kind.
 4. When $n \geq 40$, the probability of having four-of-a-kind becomes 1.
@@ -428,7 +430,11 @@ Now that I have a empirical answer of the question, I embark on my third attempt
 As mentioned at the end of [the second attempt](#second-attempt-learning), I change my approach from subtracting (i.e., correction) to building up MECE blocks. The key is to break the event-of-interest (i.e., having four-of-a-kind) into disjoint blocks ([a lesson I learned way earlier in this article](#disjoint-technique)).
 
 $$
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + ... + P(\text{exactly 13 four-of-a-kind})
+\begin{aligned}
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &+ P(\text{exactly 2 four-of-a-kind}) \\
+&+\ ... \\
+&+ P(\text{exactly 13 four-of-a-kind})
+\end{aligned}
 $$
 
 ### First case: $4 \leq n \leq 7$
@@ -492,7 +498,7 @@ $$
 P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 $$
 
-This is basically the same formula as the corrected formula. I've arrived at the same conclusion as the second attempt to generalize for $4 \leq n \leq 11$ so far.
+This is basically the same formula as the [corrected formula](#corrected-formula). I've arrived at the same conclusion as the second attempt to generalize for $4 \leq n \leq 11$ so far.
 
 ```{r}
 simple_prob <- function(k, n, r) {

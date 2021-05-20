@@ -168,6 +168,7 @@ P_{\text{corrected}}(8) = \frac{2,529,540-78}{\binom{52}{8}} = \frac{2,529,462}{
 <h2>Second attempt to generalize</h2>
 <p>In the previous section I took the approach of subtracting duplicated scenarios from total number of scenarios (which is computed using the <a href="#twostep">two-step process</a>) to arrive at the right probability of having four-of-a-kind in an 8-card hand. So naturally I wanted to explore the possibility of generalizing this approach to any <span class="math inline">\(n \in [0, 52]\)</span>.</p>
 <p>To recap, I have solved the probability of having four-of-a-kind in three situations so far.</p>
+<p><a name="corrected-formula"></a></p>
 <ol style="list-style-type: decimal">
 <li>When <span class="math inline">\(0 \leq n \leq 3\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = 0\)</span>.</li>
 <li>When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}\)</span>.</li>
@@ -324,7 +325,7 @@ df.sim &lt;- cache_rds({
   }
   bind_rows(sim_res)
 }, clean = FALSE)</code></pre>
-<p>Here I plot the simulation results for <span class="math inline">\(n \in [0. 53]\)</span>.</p>
+<p>Here I plot the simulation results for <span class="math inline">\(n \in [0, 53]\)</span>.</p>
 <pre class="r"><code>df.sim %&gt;%
   ggplot(aes(x = n, y = p)) +
     geom_point() +
@@ -332,9 +333,9 @@ df.sim &lt;- cache_rds({
     scale_x_continuous(breaks = seq(0, 50, 5)) +
     scale_y_continuous(label = percent)</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>The results are bounded within the <span class="math inline">\([0, 1]\)</span> range. The curve has an S-shape which make sense.</p>
+<p>The results are bounded within the <span class="math inline">\([0, 1]\)</span> range. The curve has an S-shape which makes sense.</p>
 <ol style="list-style-type: decimal">
-<li>When <span class="math inline">\(n \leq 3\)</span>, the probability of having four-of-a-kind is 0.2</li>
+<li>When <span class="math inline">\(n \leq 3\)</span>, the probability of having four-of-a-kind is 0.</li>
 <li>When <span class="math inline">\(n\)</span> is small (i.e., <span class="math inline">\(4 \leq n \leq 10\)</span>), the probability of having four-of-a-kind is very small (i.e., close to 0) and increases very slowly.</li>
 <li>Once <span class="math inline">\(n\)</span> becomes large (i.e., <span class="math inline">\(n \geq 30\)</span>), it’s almost certain that a <span class="math inline">\(n\)</span>-card hand would include four-of-a-kind.</li>
 <li>When <span class="math inline">\(n \geq 40\)</span>, the probability of having four-of-a-kind becomes 1.</li>
@@ -345,7 +346,11 @@ df.sim &lt;- cache_rds({
 <h2>Third attempt to generalize</h2>
 <p>As mentioned at the end of <a href="#second-attempt-learning">the second attempt</a>, I change my approach from subtracting (i.e., correction) to building up MECE blocks. The key is to break the event-of-interest (i.e., having four-of-a-kind) into disjoint blocks (<a href="#disjoint-technique">a lesson I learned way earlier in this article</a>).</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + ... + P(\text{exactly 13 four-of-a-kind})
+\begin{aligned}
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &amp;+ P(\text{exactly 2 four-of-a-kind}) \\
+&amp;+\ ... \\
+&amp;+ P(\text{exactly 13 four-of-a-kind})
+\end{aligned}
 \]</span></p>
 <div id="first-case-4-leq-n-leq-7" class="section level3">
 <h3>First case: <span class="math inline">\(4 \leq n \leq 7\)</span></h3>
@@ -392,7 +397,7 @@ Since <span class="math inline">\(\binom{13}{1} \cdot \binom{12}{1} = 2 \cdot \b
 <p><span class="math display">\[
 P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 \]</span></p>
-<p>This is basically the same formula as the corrected formula. I’ve arrived at the same conclusion as the second attempt to generalize for <span class="math inline">\(4 \leq n \leq 11\)</span> so far.</p>
+<p>This is basically the same formula as the <a href="#corrected-formula">corrected formula</a>. I’ve arrived at the same conclusion as the second attempt to generalize for <span class="math inline">\(4 \leq n \leq 11\)</span> so far.</p>
 <pre class="r"><code>simple_prob &lt;- function(k, n, r) {
   choose(r, k) * choose(4*r-4*k, n-4*k) / choose(4*r, n)
 }
