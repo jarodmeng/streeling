@@ -20,12 +20,13 @@ description: ''
 <p><a name="disjoint-technique"></a></p>
 <p>The technique Prof Pollard used to solve the problem is to break the <em>event</em> (that is, a hand of 5 cards contains four-of-a-kind) into <strong>disjoint symmetric</strong> pieces (i.e., subevents). The disjointedness indicates that those subevents cannot occur at the same time. The symmetry is not guaranteed (i.e., mutually exclusive subevents don’t necessarily occur at the same frequency or probability), but is usually present in many probability problems.</p>
 <p>A standard deck of cards has 13 ranks (i.e., from ace to king). Therefore there are 13 mutually exclusive subevents of having four-of-a-kind in 5 cards (i.e., four aces, four twos, …, up to four kings).</p>
+<p>I use <span class="math inline">\(P(k \geq 1, n=5)\)</span> to denote the probability of having any four-of-a-kind in a 5-card hand.</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind in 5-card hand})=\sum_{i=1}^{13} P(F_{i})
+P(k \geq 1, n=5)=\sum_{i=1}^{13} P(F_{i})
 \]</span></p>
 <p>where <span class="math inline">\(F_{i}\)</span> corresponds to a subevent of having a particular four-of-a-kind ranging from ace to king. Since those subevents are disjoint, the probability of the overall event is the sum of the probabilities of those subevents. Furthermore, in a standard deck, the probability of having a four-of-a-kind of any rank should be the same as any other rank, that is, <span class="math inline">\(P(F_1) = P(F_2) = ... = P(F_{13})\)</span>.</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind in 5-card hand}) = \sum_{i=1}^{13} P(F_{i}) = 13 \times P(F_1)
+P(k \geq 1, n=5) = \sum_{i=1}^{13} P(F_{i}) = 13 \times P(F_1)
 \]</span></p>
 <p>Here we use <span class="math inline">\(P(F1)\)</span> as a placeholder. One can substitute it with any other subevent <span class="math inline">\(F_i\)</span>.</p>
 <p>We can further break the subevent <span class="math inline">\(F_1\)</span> (that is, having four aces in 5 cards) into 5 disjoint and symmetric sub-subevents. For a hand of a 5 cards to have 4 aces, there must be one other card that’s not an ace. This “residual” card can be at any position (i.e., from 1st to 5th) in the hand. Those 5 different positions constitute 5 disjoint sub-subevents. Conceptually it’s straightforward to deduce that those sub-subevents have the same probability of happening (i.e., symmetry).</p>
@@ -63,7 +64,7 @@ P(F_{1,1}) = \frac{48}{52} \cdot \frac{4}{51} \cdot \frac{3}{50} \cdot \frac{2}{
 <p>Putting all these steps together, we can arrive at the final conclusion.</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind in 5-card hand}) &amp;= \sum_{i=1}^{13} P(F_{i}) = 13 \times P(F_1) \\
+P(k \geq 1, n=5) &amp;= \sum_{i=1}^{13} P(F_{i}) = 13 \times P(F_1) \\
 &amp;= 13 \times 5 \times P(F_{1, 1}) \\
 &amp;= 13 \times 5 \times \frac{48}{52} \cdot \frac{4}{51} \cdot \frac{3}{50} \cdot \frac{2}{49} \cdot \frac{1}{48} \\
 &amp;= \frac{1}{4165} \\
@@ -96,7 +97,7 @@ A 5-card hand that contains four-of-a-kind can be thought of the combination of 
 <p>There are 624 different 5-card hands that contain four-of-a-kind. So the probability of having four-of-a-kind in <em>any</em> 5-card hand is</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind in 5-card hand}) &amp;= \frac{\text{# of scenarios that match event}}{\text{total # of possible scenarios}} \\
+P(k \geq 1, n=5) &amp;= \frac{\text{# of scenarios that match event}}{\text{total # of possible scenarios}} \\
 &amp;= \frac{624}{2,598,960} = \frac{1}{4165} \approx 0.00024
 \end{aligned}
 \]</span></p>
@@ -106,7 +107,7 @@ P(\text{four-of-a-kind in 5-card hand}) &amp;= \frac{\text{# of scenarios that m
 <p>After solving the initial question, I immediately wanted to know what if we change the number of cards in the hand. A natural candidate for the next enquiry is a 7-card hand (which is commonly used in games like Text Hold’em). Following the logic above, it’s very straightforward to compute the probability.</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-kind in 7-card hand}) &amp;= \frac{\binom{13}{1} \cdot \binom{48}{3}}{\binom{52}{7}} 
+P(k \geq 1, n=7) &amp;= \frac{\binom{13}{1} \cdot \binom{48}{3}}{\binom{52}{7}} 
 \\
 &amp;= \frac{13 \cdot \frac{48!}{3! \cdot 45!}}{\frac{52!}{7! \cdot 45!}} = \frac{13 \cdot 48! \cdot 7!}{3! \cdot 52!} \\
 &amp;= \frac{13 \cdot 7 \cdot 6 \cdot 5 \cdot 4}{52 \cdot 51 \cdot 50 \cdot 49} = \frac{1}{595} \approx 0.00168
@@ -116,7 +117,7 @@ The probability of having four-of-a-kind has increased significantly from 0.024%
 <p>It’s tempting to generalize the formula.</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-kind in n-card hand}) &amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} 
+P(k \geq 1, n) &amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} 
 \\
 &amp;= \frac{13 \cdot \frac{48!}{(n-4)! \cdot (52-n)!}}{\frac{52!}{n! \cdot (52-n)!}} \\
 &amp;= \frac{13 \cdot 48! \cdot n!}{(n-4)! \cdot 52!} \\
@@ -153,13 +154,14 @@ df1 %&gt;%
 <p><a name="twostep"></a></p>
 <p>The numerator is computed as <span class="math inline">\(\binom{13}{1} \cdot \binom{52-4}{n-4} = \binom{13}{1} \cdot \binom{48}{4} = 2,529,540\)</span>. This can be thought as a 2-step process. (i), 4 cards of a kind are drawn. Since there are 13 ranks in a deck, there are <span class="math inline">\(\binom{13}{1} = 13\)</span> ways of drawing those 4 cards. (ii), next <span class="math inline">\(n-4=4\)</span> cards are drawn from the rest of the deck which now has <span class="math inline">\(52-4=48\)</span> cards. There are <span class="math inline">\(\binom{48}{4} = 194,580\)</span> ways to draw those 4 residual cards. Those two steps are independent of each other, so the total number of scenarios is the product of those two <span class="math inline">\(13 \times 194,580 = 2,529,540\)</span>.</p>
 <p><span class="math display">\[
-P(8) = \frac{2,529,540}{\binom{52}{8}} = \frac{2,529,540}{752,538,150} = \frac{2}{595} \approx 0.0033613
+P(k \geq 1, n=8) = \frac{2,529,540}{\binom{52}{8}} = \frac{2,529,540}{752,538,150} = \frac{2}{595} \approx 0.0033613
 \]</span></p>
 <p>This logic is flawed because there are actually duplication of the same scenarios. For example, let’s say ace is the rank drawn in the first step. That is, the first step draws 4 aces from the deck. When one draws another 4 cards from the rest of the deck, it’s possible to draw another four-of-a-kind (albeit a different kind than ace). In fact, there are <span class="math inline">\(\binom{12}{1} = 12\)</span> ways to draw another four-of-a-kind in the second step. Drawing 4 aces in the first step and drawing 4 twos in the second step makes the 8-card hand <span class="math inline">\(\{ace, ace, ace, ace, 2, 2, 2, 2\}\)</span>. One can reverse the order of the two steps to reach the same hand (remember that the order of the cards in the hand doesn’t matter). If 4 twos are drawn in the first step and 4 aces are drawn in the second, the hand is <span class="math inline">\(\{2, 2, 2, 2, ace, ace, ace, ace\}\)</span> which is effectively the same hand. Therefore, there are some duplication of scenarios in the numerator <span class="math inline">\(2,529,540\)</span> and this duplication makes the probability higher than it really is.</p>
 <p>Now the question becomes how to quantify the duplication and correct the overcounting.</p>
 <p>For this particular case of <span class="math inline">\(n=8\)</span>. The duplication occurs when two four-of-a-kind sets are drawn in different orders in the two-step process (i.e., aces before twos vs. twos before aces). There are 13 ways to draw the first four-of-a-kind and for each of those four-of-a-kind, there are 12 ways to draw the second four-of-a-kind, so there are in total <span class="math inline">\(13 \times 12 = 156\)</span> scenarios that have two four-of-a-kind sets in the numerator. Since there are only two sets of four-of-a-kind, the duplication is precisely double-counting (i.e., aces-and-twos and twos-and-aces are the same). So to correct for the duplication, I need to subtract <span class="math inline">\(156/2=78\)</span> scenarios from the numerator.</p>
+<p>I use <span class="math inline">\(P&#39;()\)</span> to denote the corrected probability formula.</p>
 <p><span class="math display">\[
-P_{\text{corrected}}(8) = \frac{2,529,540-78}{\binom{52}{8}} = \frac{2,529,462}{752,538,150} \approx 0.0033612
+P&#39;(k \geq 1, n=8) = \frac{2,529,540-78}{\binom{52}{8}} = \frac{2,529,462}{752,538,150} \approx 0.0033612
 \]</span></p>
 <p>The corrected probability is very close to the previous one because the magnitude of the duplication is very limited (i.e., 78 scenarios in 2.5+ million).</p>
 </div>
@@ -170,9 +172,9 @@ P_{\text{corrected}}(8) = \frac{2,529,540-78}{\binom{52}{8}} = \frac{2,529,462}{
 <p>To recap, I have solved the probability of having four-of-a-kind in three situations so far.</p>
 <p><a name="corrected-formula"></a></p>
 <ol style="list-style-type: decimal">
-<li>When <span class="math inline">\(0 \leq n \leq 3\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = 0\)</span>.</li>
-<li>When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}\)</span>.</li>
-<li>When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}\)</span></li>
+<li>When <span class="math inline">\(0 \leq n \leq 3\)</span>, <span class="math inline">\(\underset{0 \leq n \leq 3}P(k \geq 1, n) = 0\)</span>.</li>
+<li>When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(\underset{4 \leq n \leq 7}P(k \geq 1, n) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}\)</span>.</li>
+<li>When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(\underset{8 \leq n \leq 11}P(k \geq 1, n) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}\)</span></li>
 </ol>
 <p>My <a href="#first-attempt-to-generalize">first attempt</a> to generalize only works in the second case. When <span class="math inline">\(4 \leq n \leq 7\)</span>, <span class="math inline">\(0 \leq n-4 \leq 3\)</span> and there are no four-of-a-kind in all <span class="math inline">\(\binom{48}{n-4}\)</span> residual card scenarios (hence no risk of duplication and overcounting). Conveniently most poker hands (e.g., 5-card hand and 7-card hand) are within this case and the naive generalized formula works just fine.</p>
 <p>The formula in the third case above builds upon the naive generalized formula by correcting the numerator (i.e., subtracting the number of duplicated scenarios). The correction term <span class="math inline">\(\binom{13}{2} \cdot \binom{44}{n-8}\)</span> is itself computed following a two-step logic. (i), there are <span class="math inline">\(\binom{13}{2} = 78\)</span> ways of drawing 2 sets of four-of-a-kind from 13 ranks included in a standard deck of cards. (ii), for each of those 78 combinations of 2 sets of four-of-a-kind, there are <span class="math inline">\(\binom{44}{n-8}\)</span> ways to draw the residual <span class="math inline">\(n-8\)</span> (remember that <strong>two</strong> sets of four-of-a-kind have been drawn) cards. Since all of those <span class="math inline">\(\binom{13}{2} \cdot \binom{44}{n-8}\)</span> scenarios appear twice in the naive generalied formula’s numerator <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span>, they need to be subtracted once to arrive at the right numerator. The reason why this corrected generalized formula only works for <span class="math inline">\(8 \leq n \leq 11\)</span> is that <span class="math inline">\(n-8 \geq 4\)</span> when <span class="math inline">\(n \geq 12\)</span> and it would incur more unaccounted duplication.</p>
@@ -188,7 +190,7 @@ P_{\text{corrected}}(8) = \frac{2,529,540-78}{\binom{52}{8}} = \frac{2,529,462}{
 </ol>
 <p>When <span class="math inline">\(k\)</span> sets of four-of-a-kind are possible in an <span class="math inline">\(n\)</span>-card hand, there are <span class="math inline">\(\binom{13}{k} \cdot \binom{52-4k}{n-4k}\)</span> scenarios of such unique <span class="math inline">\(n\)</span>-card hands. Each of those unique hand is included in the original <span class="math inline">\(\binom{13}{1} \cdot \binom{48}{n-4}\)</span> <span class="math inline">\(k\)</span> times. So to correct the duplication, <span class="math inline">\((k-1) \cdot \binom{13}{k} \cdot \binom{52-4k}{n-4k}\)</span> scenarios need to be subtracted.</p>
 <p><span class="math display">\[
-P_{\text{corrected}}(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \sum\limits_{k=2}^{13} (k-1) \cdot \binom{13}{k} \cdot \binom{52-4k}{n-4k}}{\binom{52}{n}}
+P&#39;(k \geq 1, n) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \sum\limits_{k=2}^{13} (k-1) \cdot \binom{13}{k} \cdot \binom{52-4k}{n-4k}}{\binom{52}{n}}
 \]</span></p>
 <p>I plot the results below using the new generalized formula.</p>
 <pre class="r"><code>prob2 &lt;- function(n) {
@@ -213,7 +215,7 @@ df2 %&gt;%
 <p>Comparing this chart to <a href="#figure1">figure 1</a> shows some differences.</p>
 <ol style="list-style-type: decimal">
 <li>The corrections seem to have little impact on the probabilities when <span class="math inline">\(n\)</span> is small (i.e., $n ).</li>
-<li>For larger <span class="math inline">\(n\)</span>s, the corrections have material impact. <span class="math inline">\(P_{\text{corrected}}(28)\)</span> is close to 60% rather than 100%.</li>
+<li>For larger <span class="math inline">\(n\)</span>s, the corrections have material impact. <span class="math inline">\(P&#39;(28)\)</span> is close to 60% rather than 100%.</li>
 </ol>
 <p>I plot the two figures together to show the differences more clearly.</p>
 <pre class="r"><code>df1n2 &lt;- bind_rows(
@@ -347,16 +349,15 @@ df.sim &lt;- cache_rds({
 <p>As mentioned at the end of <a href="#second-attempt-learning">the second attempt</a>, I change my approach from subtracting (i.e., correction) to building up MECE blocks. The key is to break the event-of-interest (i.e., having four-of-a-kind) into disjoint blocks (<a href="#disjoint-technique">a lesson I learned way earlier in this article</a>).</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &amp;+ P(\text{exactly 2 four-of-a-kind}) \\
-&amp;+\ ... \\
-&amp;+ P(\text{exactly 13 four-of-a-kind})
+P(k \geq 1, n) = P(k=1,n) + P(k=2,n) + ... + P(k=13,n)
 \end{aligned}
 \]</span></p>
+<p>where <span class="math inline">\(P(k,n)\)</span> denotes having exactly <span class="math inline">\(k\)</span> sets of four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
 <div id="first-case-4-leq-n-leq-7" class="section level3">
 <h3>First case: <span class="math inline">\(4 \leq n \leq 7\)</span></h3>
-<p>When <span class="math inline">\(4 \leq n \leq 7\)</span>, there are at maximum exactly 1 four-of-a-kind in the hand. So <span class="math inline">\(P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind})\)</span>. Then I can use the <a href="#twostep">two-step approach</a> to solve the problem.</p>
+<p>When <span class="math inline">\(4 \leq n \leq 7\)</span>, there are at maximum exactly 1 four-of-a-kind in the hand. So <span class="math inline">\(P(n) = P(1,n)\)</span>. Then I can use the <a href="#twostep">two-step approach</a> to solve the problem.</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}
+\underset{4 \leq n \leq 7}P(k \geq 1, n) = \underset{4 \leq n \leq 7}P(k=1,n) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}
 \]</span></p>
 <p>The numerator here is basically the original numerator. The result should be the same as the orignal formula and the corrected formula (note that there’s simply no correction needed when <span class="math inline">\(4 \leq n \leq 7\)</span>).</p>
 </div>
@@ -364,40 +365,38 @@ P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) = \frac{\binom{13}
 <h3>Second case, <span class="math inline">\(8 \leq n \leq 11\)</span></h3>
 <p>This case is a bit more complicated than the first case. When <span class="math inline">\(8 \leq n \leq 11\)</span>, there are at maximum 2 sets of four-of-a-kind in the hand. Hence,</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind})
+\underset{8 \leq n \leq 11}P(k \geq 1, n) = \underset{8 \leq n \leq 11}P(k=1,n) + \underset{8 \leq n \leq 11}P(k=2,n)
 \]</span></p>
-<p>I can work out the 2nd term <span class="math inline">\(P(\text{exactly 2 four-of-a-kind})\)</span> first using the same two-step approach.</p>
+<p>I can work out the 2nd term <span class="math inline">\(P(2,n)\)</span> first using the same two-step approach.</p>
 <p><span class="math display">\[
-P(\text{exactly 2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\underset{8 \leq n \leq 11}P(k=2,n) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 \]</span></p>
-<p>I now turn my attention to the first term <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>.</p>
+<p>I now turn my attention to the first term <span class="math inline">\(P(k=1,n)\)</span>.</p>
 <p><span class="math display">\[
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})]
+\underset{8 \leq n \leq 11}P(k=1,n) = \underset{8 \leq n \leq 11}{P_{\text{raw}}}(k \geq 1, n) \cdot [1 - \underset{8 \leq n \leq 11}{P_{r=12}}(k \geq 1,n-4)]
 \]</span></p>
 <p>where,</p>
 <p><span class="math display">\[
-P(\text{1 four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}
+\underset{8 \leq n \leq 11}{P_{\text{raw}}}(k \geq 1,n) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}}
 \]</span></p>
-<p>and</p>
+<p>is <em>the raw probability of having at least 1 four-of-a-kind</em> (it’s <em>raw</em> because it hasn’t been corrected for <a href="#duplication-and-overcounting">duplication</a>), and</p>
 <p><span class="math display">\[
-P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
+\underset{8 \leq n \leq 11}{P_{r=12}}(k \geq 1, n-4) = \underset{8 \leq n \leq 11}{P_{r=12}}(k=1, n-4) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
 \]</span></p>
-<ul>
-<li><span class="math inline">\(P(\text{1 four-of-a-kind})\)</span> is the probability of having at least 1 four-of-a-kind.</li>
-<li><span class="math inline">\(P_{12}(\text{four-of-a-kind})\)</span> is <em>the probability of having four-of-a-kind in the remaining 48 (i.e., only 12 ranks left and hence the subscript) cards when a kind has already been drawn</em>. When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand.</li>
-</ul>
+<p>is <em>the probability of having four-of-a-kind in the remaining 48 cards when a kind has already been drawn</em>. Here I use <span class="math inline">\(P_{r=12}()\)</span> to indicate that it’s based on a remainder deck that has 12 full ranks left, after drawing a four-of-a-kind. The notation convention is that when the subscript is missing (i.e., <span class="math inline">\(P()\)</span>), it means the default deck with 13 full ranks, that is, <span class="math inline">\(P() = P_{r=13}()\)</span>.</p>
+<p>When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand. The term <span class="math inline">\(1 - \underset{8 \leq n \leq 11}{P_{r=12}}(k \geq 1, n-4)\)</span> is basically the correction needed to adjust the raw probability <span class="math inline">\(\underset{8 \leq n \leq 11}{P_{\text{raw}}}(k=1,n)\)</span>.</p>
 <p>Putting these all together:</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) &amp;= P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 1 four-of-a-kind}) \\
+\underset{8 \leq n \leq 11}P(k \geq 1, n) &amp;= \underset{8 \leq n \leq 11}P(k=2,n) + \underset{8 \leq n \leq 11}P(k=1,n) \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}] \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} \\
-&amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4} + \binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+&amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 \end{aligned}
 \]</span>
 Since <span class="math inline">\(\binom{13}{1} \cdot \binom{12}{1} = 2 \cdot \binom{13}{2}\)</span>, the formula can be simplified as</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\underset{8 \leq n \leq 11}P(k \geq 1,n) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 \]</span></p>
 <p>This is basically the same formula as the <a href="#corrected-formula">corrected formula</a>. I’ve arrived at the same conclusion as the second attempt to generalize for <span class="math inline">\(4 \leq n \leq 11\)</span> so far.</p>
 </div>
@@ -406,57 +405,54 @@ P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13
 <p>Now I progress to the next case, <span class="math inline">\(12 \leq n \leq 15\)</span>. It’s now possible to have up to 3 different four-of-a-kind in the hand.</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &amp;+ P(\text{exactly 2 four-of-a-kind}) \\
-&amp;+ P(\text{exactly 3 four-of-a-kind})
+\underset{12 \leq n \leq 15}P(k \geq 1, n) = \underset{12 \leq n \leq 15}P(k=1,n)\ + \underset{12 \leq n \leq 15}P(k=2,n)\ + \underset{12 \leq n \leq 15}P(k=3,n)
 \end{aligned}
 \]</span></p>
-<p>I still start from the greatest possible four-of-a-kind, <span class="math inline">\(P(\text{exactly 3 four-of-a-kind})\)</span>.</p>
+<p>I still start from the greatest possible four-of-a-kind, <span class="math inline">\(\underset{12 \leq n \leq 15}P(k=3,n)\)</span>.</p>
 <p><span class="math display">\[
-P(\text{exactly 3 four-of-a-kind}) = \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+\underset{12 \leq n \leq 15}P(k=3,n) = \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \]</span></p>
 <p>When <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(0 \leq n-12 \leq 3\)</span>, so it’s not possible to have four-of-kind in the residual (i.e., <span class="math inline">\(n-12\)</span>) cards.</p>
-<p>I can deduce <span class="math inline">\(P(\text{exactly 2 four-of-a-kind})\)</span> using the same logic I used in the second case.</p>
+<p>I can deduce <span class="math inline">\(\underset{12 \leq n \leq 15}P(lk=2,n)\)</span> using the same logic I used in the second case.</p>
 <p><span class="math display">\[
-P(\text{exactly 2 four-of-a-kind}) = P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})]
+\underset{12 \leq n \leq 15}P(k=2,n) = \underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 2, n) \cdot [1 - \underset{12 \leq n \leq 15}{P_{r=11}}(k \geq 1,n-8)]
 \]</span></p>
 <p>where,</p>
 <p><span class="math display">\[
-P(\text{2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 2, n) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-P_{11}(\text{four-of-a-kind}) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
+\underset{12 \leq n \leq 15}{P_{r=11}}(k \geq 1,n-8) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
 \]</span></p>
 <p>So,</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{exactly 2 four-of-a-kind}) &amp;= P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})] \\
+\underset{12 \leq n \leq 15}P(k=2,n) &amp;= \underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 2, n) \cdot [1 - \underset{12 \leq n \leq 15}{P_{r=11}}(k \geq 1,n-8)] \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} \cdot [1 - \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}] \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
 \]</span>
-The most difficult term to compute is <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>. Using the same logic as above, I have</p>
+The most difficult term to compute is <span class="math inline">\(\underset{12 \leq n \leq 15}P(k=1,n)\)</span>. Using the same logic as above, I have</p>
 <p><span class="math display">\[
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})]
+\underset{12 \leq n \leq 15}P(k=1,n) = \underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 1, n) \cdot [1 - \underset{12 \leq n \leq 15}{P_{r=12}}(k \geq 1,n-4)]
 \]</span></p>
 <p>I’ve computed the first term a couple of times throughout this article so far.</p>
 <p><span class="math display">\[
-P(\text{1 four-of-a-kind})  = \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}
+\underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 1, n)  = \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}
 \]</span></p>
 <p>When <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(8 \leq n-4 \leq 11\)</span> which falls into the second case. That is, there are at most 2 sets of four-of-a-kind in the residual cards. So</p>
 <p><span class="math display">\[
-P_{12}(\text{four-of-a-kind}) = P_{12}(\text{exactly 1 four-of-a-kind}) + P_{12}(\text{exactly 2 four-of-a-kind})
+\underset{12 \leq n \leq 15}{P_{r=12}}(k \geq 1,n-4) = \underset{12 \leq n \leq 15}{P_{r=12}}(k=1,n-4) + \underset{12 \leq n \leq 15}{P_{r=12}}(k=2,n-4)
 \]</span></p>
-<p>Following the same logic, I can get</p>
+<p>Following the same logic derived in the second case, I can get</p>
 <p><span class="math display">\[
-P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
+\underset{12 \leq n \leq 15}{P_{r=12}}(k \geq 1,n-4) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
 \]</span></p>
 <p>Putting everything together,</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) =\ &amp; P(\text{exactly 3 four-of-a-kind}) +\\
-&amp;P(\text{exactly 2 four-of-a-kind}) + \\
-&amp;P(\text{exactly 1 four-of-a-kind}) \\
+\underset{12 \leq n \leq 15}P(k \geq 1, n) =\ &amp; \underset{12 \leq n \leq 15}P(k=3, n)\ + \underset{12 \leq n \leq 15}P(k=2, n)\ + \underset{12 \leq n \leq 15}P(k=1, n) \\
 =\ &amp; \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}\ + \\
 &amp;\frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}\ + \\
 &amp;\frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}] \\
@@ -468,85 +464,105 @@ P(\text{four-of-a-kind}) =\ &amp; P(\text{exactly 3 four-of-a-kind}) +\\
 &amp;\frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
 \]</span>
-The formula is now a monstrosity. But the process of deriving the formula gives me some hint at how a generalized formula might be worked out. The general idea is very simple.</p>
+The formula is now a monstrosity. But the process of deriving the formula gives me some hint at how a generalized formula might be worked out.</p>
+</div>
+<div id="generalized-finally" class="section level3">
+<h3>Generalized, finally</h3>
+<p>The general idea can be summarized as 2 main ideas.</p>
+<ol style="list-style-type: decimal">
+<li>The probability of having (any) four-of-a-kind equals to the sum of the probability of having exactly <span class="math inline">\(K\)</span> (<span class="math inline">\(K \in [1, 13]\)</span>) sets of four-of-a-kind. That is, the event-of-interest can be dividied into <span class="math inline">\(K\)</span> disjoint subevents.</li>
+</ol>
 <p><span class="math display">\[
-P(\text{exactly }k\text{ four-of-a-kid}) = P(k\text{ four-of-a-kind}) \cdot [1 - P_{13-k}(\text{four-of-a-kind})]
+P(k \geq 1, n) = \sum\limits_{K=1}^{13} P(k=K, n)
 \]</span></p>
-<p>Let <span class="math inline">\(G\)</span> be a function that inputs of <span class="math inline">\(r\)</span> (i.e., how many full ranks are in the deck or remaining of the deck) and gives the probability of having at least <span class="math inline">\(k\)</span> four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The probability of having exactly <span class="math inline">\(K\)</span> sets of four-of-a-kind is <em>the raw probability of having at least <span class="math inline">\(K\)</span> sets of four-of-a-kind times the probability of not having any four-of-a-kind in the residual cards</em>.</li>
+</ol>
+<p><span class="math display">\[
+P(k = K, n) = P_{\text{raw}}(k \geq K, n) \cdot [1 - P_{13-K}(k \geq 1, n-4K)]
+\]</span></p>
+<p>Let <span class="math inline">\(G\)</span> be a function that corresponds to <span class="math inline">\(P_{\text{raw}}()\)</span>. That is, a function that takes inputs of <span class="math inline">\(R\)</span> (i.e., how many full ranks are there in the deck or the remainder of the deck), <span class="math inline">\(K\)</span> and <span class="math inline">\(n\)</span>, and outputs the raw probability of having at least <span class="math inline">\(K\)</span> sets of four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
 <p><span class="math display">\[
 \begin{aligned}
-G(r, k, n) &amp;= P_{r}(k\text{ four-of-a-kind in }n\text{-card hand}) \\
-&amp;= \frac{\binom{r}{k} \cdot \binom{4r-4k}{n-4k}}{\binom{4r}{n}}
+G(R, K, n) &amp;= P_{\text{raw, }r=R}(k \geq K, n) \\
+&amp;= \frac{\binom{R}{K} \cdot \binom{4R-4K}{n-4K}}{\binom{4R}{n}}
 \end{aligned}
-\]</span></p>
-<p>Let <span class="math inline">\(F\)</span> be a function that takes in an input of <span class="math inline">\(r\)</span> and gives the probability of having four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
+\]</span>
+Let <span class="math inline">\(F\)</span> be a function that corresponds to <span class="math inline">\(P(k \geq 1, n)\)</span>. That is, a function that takes in an input of <span class="math inline">\(R\)</span> and outputs the probability of having (any) four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
 <p><span class="math display">\[
-F(n, r) = P_{r}(\text{four-of-a-kind in }n\text{-card hand})
+F(n, R) = P_{r=R}(k \geq 1, n)
 \]</span></p>
 <p>Then the generalized question becomes the following (assuming the cards are drawn from a standard 13-rank deck).</p>
 <p><span class="math display">\[
-P(\text{four-of-a-kind}) = F(n, 13)
+P_{r=13}(k \geq 1, n) = F(n, 13)
 \]</span></p>
 <p>For the third case (i.e., <span class="math inline">\(12 \leq n \leq 15\)</span>),</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &amp;+ P(\text{exactly 2 four-of-a-kind}) \\
-&amp;+ P(\text{exactly 3 four-of-a-kind})
+\underset{12 \leq n \leq 15}P(k \geq 1, n) = \underset{12 \leq n \leq 15}P(k=1, n)\ + \underset{12 \leq n \leq 15}P(k=2, n)\ + \underset{12 \leq n \leq 15}P(k=3, n)
 \end{aligned}
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{exactly 1 four-of-a-kind}) &amp;= P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})] \\
+\underset{12 \leq n \leq 15}P(k=1, n) &amp;= \underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 1, n) \cdot [1 - \underset{12 \leq n \leq 15}{P_{r=12}}(k \geq 1, n-4)] \\
 &amp;= G(13, 1, n) \cdot [1 - F(n-4, 12)]
 \end{aligned}
 \]</span>
 <span class="math display">\[
 \begin{aligned}
-P(\text{exactly 2 four-of-a-kind}) &amp;= P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})] \\
+\underset{12 \leq n \leq 15}P(k=2, n) &amp;= \underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 2, n) \cdot [1 - \underset{12 \leq n \leq 15}{P_{r=11}}(k \geq 1, n-8)] \\
 &amp;= G(13, 2, n) \cdot [1 - F(n-8, 11)]
 \end{aligned}
 \]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{exactly 3 four-of-a-kind}) &amp;= P(\text{3 four-of-a-kind}) \cdot [1 - P_{10}(\text{four-of-a-kind})] \\
+\underset{12 \leq n \leq 15}P(k=3, n) &amp;= \underset{12 \leq n \leq 15}{P_{\text{raw}}}(k \geq 3, n) \cdot [1 - \underset{12 \leq n \leq 15}{P_{r=10}}(k \geq 1, n-12)] \\
 &amp;= G(13, 3, n) \cdot [1 - F(n-12, 10)]
 \end{aligned}
 \]</span></p>
-<p>So</p>
+<p>Note that when <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(F(n-12, 10) = 0\)</span>, because <span class="math inline">\(0 \leq n-12 \leq 3\)</span>, and drawing <span class="math inline">\(n-12\)</span> cards from a deck with 10 full ranks (or any deck for that matter) can’t produce any four-of-a-kind by definition. Therefore</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) &amp;= F(n, 13) \\
-&amp;= P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 3 four-of-a-kind}) \\
-&amp;= G(13, 1, n) \cdot [1 - F(n-4, 12)] + G(13, 2, n) \cdot [1 - F(n-8, 11)] + G(13, 3, n) \cdot [1 - F(n-12, 10)]
+\underset{12 \leq n \leq 15}P(k=3, n) = G(13, 3, n) \cdot [1 - F(n-12, 10)] = G(13, 3, n)
+\end{aligned}
+\]</span></p>
+<p>Putting everything together gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\underset{12 \leq n \leq 15}P(k \geq 1, n) =\ &amp; F(n, 13) \\
+=\ &amp; \underset{12 \leq n \leq 15}P(k=1,n)\ + \underset{12 \leq n \leq 15}P(k=2,n)\ + \underset{12 \leq n \leq 15}P(k=3,n)\\
+=\ &amp; G(13, 1, n) \cdot [1 - F(n-4, 12)]\ +\\
+&amp; G(13, 2, n) \cdot [1 - F(n-8, 11)]\ +\\
+&amp; G(13, 3, n) \cdot [1 - F(n-12, 10)]
 \end{aligned}
 \]</span>
 Generalizing <span class="math inline">\(F(n, 13)\)</span> becomes</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) &amp;= F(n, 13) \\
-&amp;= \sum\limits_{k=1}^{13} G(13, k, n) \cdot [1 - F(n-4k, 13-k)]
+P(k \geq 1, n) &amp;= F(n, 13) \\
+&amp;= \sum\limits_{K=1}^{13} G(13, K, n) \cdot [1 - F(n-4K, 13-K)]
 \end{aligned}
 \]</span></p>
-<p>For this to work, <span class="math inline">\(F(n, r) = 0\)</span> for <span class="math inline">\(n \leq 3\)</span>. Once the logic is sorted out, it’s actually quite easy to code the recursive function.</p>
-<pre class="r"><code>G &lt;- function(r, k, n) {
-  choose(r, k) * choose(4*r-4*k, n-4*k) / choose(4*r, n)
+<p>For this to work, <span class="math inline">\(F(n, R) = 0\)</span> for <span class="math inline">\(n \leq 3\)</span>. Once the logic is sorted out, it’s actually quite easy to code the recursive function.</p>
+<pre class="r"><code>G &lt;- function(R, K, n) {
+  choose(R, K) * choose(4*R-4*K, n-4*K) / choose(4*R, n)
 }
 
-F &lt;- function(n, r) {
+F &lt;- function(n, R) {
   if (n &lt;= 3) {
     return(0)
   }
-  res &lt;- vector(mode = &quot;numeric&quot;, length = r)
-  for (i in seq(r)) {
-    res[i] &lt;- G(r, i, n) * (1 - F(n-4*i, r-i))
+  res &lt;- vector(mode = &quot;numeric&quot;, length = R)
+  for (K in seq(R)) {
+    res[K] &lt;- G(R, K, n) * (1 - F(n-4*K, R-K))
   }
   sum(res)
 }</code></pre>
 <p>I first plot the results with the simulation results to see if they match.</p>
 <pre class="r"><code>df.sim %&gt;%
   rename(p.sim = p) %&gt;%
-  mutate(p.formula = map_dbl(n, ~F(.x, r = 13))) %&gt;%
+  mutate(p.formula = map_dbl(n, ~F(.x, R = 13))) %&gt;%
   pivot_longer(p.sim:p.formula, names_to = &quot;type&quot;, values_to = &quot;probability&quot;) %&gt;%
   ggplot(aes(x = n, y = probability)) +
     geom_point(aes(color = type)) +
@@ -560,7 +576,7 @@ F &lt;- function(n, r) {
   n = 0:28,
   p.original = map_dbl(n, prob1),
   p.corrected = map_dbl(n, prob2),
-  p.formula = map_dbl(n, ~F(.x, r = 13))
+  p.formula = map_dbl(n, ~F(.x, R = 13))
 )
 df3 %&gt;%
   pivot_longer(-n, names_to = &quot;type&quot;, values_to = &quot;probability&quot;) %&gt;%
