@@ -711,16 +711,16 @@ I first plot the results with the simulation results to see if they match.
 df.sim %>%
   rename(p.sim = p) %>%
   mutate(p.formula = map_dbl(n, ~F(.x, R = 13))) %>%
-  pivot_longer(p.sim:p.formula, names_to = "type", values_to = "probability") %>%
-  ggplot(aes(x = n, y = probability)) +
-    geom_point(aes(color = type)) +
-    scale_x_continuous(breaks = seq(0, 50, 5)) +
-    scale_y_continuous(label = percent) +
-    facet_wrap(~type, ncol = 1) +
-    theme(legend.position = "top")
+  ggplot(aes(x = p.sim, y = p.formula)) +
+    geom_point() +
+    geom_abline(aes(intercept = 0, slope = 1), color = "red", linetype = "dashed") +
+    scale_x_continuous(label = percent) +
+    scale_y_continuous(label = percent)
 ```
 
-The results match the simulation very well. Out of curiosity, I plot the original and corrected results for $n \in [0, 28]$ with the formula results to see which one is "more accurate".
+The results match the simulation very well.
+
+Out of curiosity, I plot the original and corrected results for $n \in [0, 28]$ with the formula results to see which one is "more accurate".
 
 ```{r}
 df3 <- tibble(
