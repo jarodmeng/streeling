@@ -372,7 +372,7 @@ P(\text{exactly 2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{
 \]</span></p>
 <p>I now turn my attention to the first term <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>.</p>
 <p><span class="math display">\[
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P&#39;(\text{exactly 1 four-of-a-kind})]
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{-1}(\text{four-of-a-kind})]
 \]</span></p>
 <p>where,</p>
 <p><span class="math display">\[
@@ -380,14 +380,16 @@ P(\text{1 four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{5
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-P&#39;(\text{exactly 1 four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
+P_{-1}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
 \]</span></p>
-<p><span class="math inline">\(P(\text{1 four-of-a-kind})\)</span> is the probability of having at least 1 four-of-a-kind. <span class="math inline">\(P&#39;(\text{exactly 1 four-of-a-kind})\)</span> is the probability of having exactly 1 four-of-a-kind in the remaining 48 cards when a kind has already been drawn (to form the previous 1 four-of-a-kind). When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand.</p>
+<ul>
+<li><span class="math inline">\(P(\text{1 four-of-a-kind})\)</span> is the probability of having at least 1 four-of-a-kind.</li>
+<li><span class="math inline">\(P_{-1}(\text{exactly 1 four-of-a-kind})\)</span> is <em>the probability of having exactly 1 four-of-a-kind in the remaining 48 cards when a kind has already been drawn (hence the -1 subscript)</em>. When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand.</li>
+</ul>
 <p>Putting these all together:</p>
 <p><span class="math display">\[
 \begin{aligned}
 P(\text{four-of-a-kind}) &amp;= P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 1 four-of-a-kind}) \\
-&amp;= P(\text{exactly 2 four-of-a-kind}) + P(\text{1 four-of-a-kind}) \cdot [1 - P&#39;(\text{exactly 1 four-of-a-kind})]\\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}] \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} \\
 &amp;= \frac{\binom{13}{1} \cdot \binom{48}{n-4} + \binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}
@@ -398,6 +400,66 @@ Since <span class="math inline">\(\binom{13}{1} \cdot \binom{12}{1} = 2 \cdot \b
 P(\text{four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
 \]</span></p>
 <p>This is basically the same formula as the <a href="#corrected-formula">corrected formula</a>. I’ve arrived at the same conclusion as the second attempt to generalize for <span class="math inline">\(4 \leq n \leq 11\)</span> so far.</p>
+</div>
+<div id="third-case-12-leq-n-leq-15" class="section level3">
+<h3>Third case, <span class="math inline">\(12 \leq n \leq 15\)</span></h3>
+<p>Now I progress to the next case, <span class="math inline">\(12 \leq n \leq 15\)</span>. It’s now possible to have up to 3 different four-of-a-kind in the hand.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &amp;+ P(\text{exactly 2 four-of-a-kind}) \\
+&amp;+ P(\text{exactly 3 four-of-a-kind})
+\end{aligned}
+\]</span></p>
+<p>I still start from the greatest possible four-of-a-kind, <span class="math inline">\(P(\text{exactly 3 four-of-a-kind})\)</span>.</p>
+<p><span class="math display">\[
+P(\text{exactly 3 four-of-a-kind}) = \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+\]</span></p>
+<p>When <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(0 \leq n-12 \leq 3\)</span>, so it’s not possible to have four-of-kind in the residual (i.e., <span class="math inline">\(n-12\)</span>) cards.</p>
+<p>I can deduce <span class="math inline">\(P(\text{exactly 2 four-of-a-kind})\)</span> using the same logic I used in the second case.</p>
+<p><span class="math display">\[
+P(\text{exactly 2 four-of-a-kind}) = P(\text{2 four-of-a-kind}) \cdot [1 - P_{-2}(\text{four-of-a-kind})]
+\]</span></p>
+<p>where,</p>
+<p><span class="math display">\[
+P(\text{2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+P_{-2}(\text{four-of-a-kind}) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
+\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{exactly 2 four-of-a-kind}) &amp;= P(\text{2 four-of-a-kind}) \cdot [1 - P_{-2}(\text{four-of-a-kind})] \\
+&amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} \cdot [1 - \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}] \\
+&amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+\end{aligned}
+\]</span>
+The most difficult term to compute is <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>. Using the same logic as above, I have</p>
+<p><span class="math display">\[
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{-1}(\text{four-of-a-kind})]
+\]</span></p>
+<p>I’ve computed the first term a couple of times throughout this article so far.</p>
+<p><span class="math display">\[
+P(\text{1 four-of-a-kind})  = \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}
+\]</span></p>
+<p>When <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(8 \leq n-4 \leq 11\)</span> which falls into the second case. That is, there are at most 2 sets of four-of-a-kind in the residual cards. So</p>
+<p><span class="math display">\[
+P_{-1}(\text{four-of-a-kind}) = P_{-1}(\text{exactly 1 four-of-a-kind}) + P_{-1}(\text{exactly 2 four-of-a-kind})
+\]</span></p>
+<p>Following the same logic, I can get</p>
+<p><span class="math display">\[
+P_{-1}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
+\]</span></p>
+<p>Putting everything together,</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind}) &amp;= P(\text{exactly 3 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 1 four-of-a-kind}) \\
+&amp;= \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}] \\
+&amp;= \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}} \\
+&amp;= \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+\end{aligned}
+\]</span></p>
 <pre class="r"><code>simple_prob &lt;- function(k, n, r) {
   choose(r, k) * choose(4*r-4*k, n-4*k) / choose(4*r, n)
 }
