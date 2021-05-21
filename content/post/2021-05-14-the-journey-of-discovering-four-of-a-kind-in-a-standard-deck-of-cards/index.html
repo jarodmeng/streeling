@@ -372,7 +372,7 @@ P(\text{exactly 2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{
 \]</span></p>
 <p>I now turn my attention to the first term <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>.</p>
 <p><span class="math display">\[
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{-1}(\text{four-of-a-kind})]
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})]
 \]</span></p>
 <p>where,</p>
 <p><span class="math display">\[
@@ -380,11 +380,11 @@ P(\text{1 four-of-a-kind}) = \frac{\binom{13}{1} \cdot \binom{48}{n-4}}{\binom{5
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-P_{-1}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
+P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
 \]</span></p>
 <ul>
 <li><span class="math inline">\(P(\text{1 four-of-a-kind})\)</span> is the probability of having at least 1 four-of-a-kind.</li>
-<li><span class="math inline">\(P_{-1}(\text{exactly 1 four-of-a-kind})\)</span> is <em>the probability of having exactly 1 four-of-a-kind in the remaining 48 cards when a kind has already been drawn (hence the -1 subscript)</em>. When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand.</li>
+<li><span class="math inline">\(P_{12}(\text{four-of-a-kind})\)</span> is <em>the probability of having four-of-a-kind in the remaining 48 (i.e., only 12 ranks left and hence the subscript) cards when a kind has already been drawn</em>. When <span class="math inline">\(8 \leq n \leq 11\)</span>, <span class="math inline">\(4 \leq n-4 \leq 7\)</span>, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining <span class="math inline">\(n-4\)</span> cards in the hand.</li>
 </ul>
 <p>Putting these all together:</p>
 <p><span class="math display">\[
@@ -417,7 +417,7 @@ P(\text{exactly 3 four-of-a-kind}) = \frac{\binom{13}{3} \cdot \binom{40}{n-12}}
 <p>When <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(0 \leq n-12 \leq 3\)</span>, so it’s not possible to have four-of-kind in the residual (i.e., <span class="math inline">\(n-12\)</span>) cards.</p>
 <p>I can deduce <span class="math inline">\(P(\text{exactly 2 four-of-a-kind})\)</span> using the same logic I used in the second case.</p>
 <p><span class="math display">\[
-P(\text{exactly 2 four-of-a-kind}) = P(\text{2 four-of-a-kind}) \cdot [1 - P_{-2}(\text{four-of-a-kind})]
+P(\text{exactly 2 four-of-a-kind}) = P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})]
 \]</span></p>
 <p>where,</p>
 <p><span class="math display">\[
@@ -425,19 +425,19 @@ P(\text{2 four-of-a-kind}) = \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{5
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-P_{-2}(\text{four-of-a-kind}) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
+P_{11}(\text{four-of-a-kind}) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
 \]</span></p>
 <p>So,</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{exactly 2 four-of-a-kind}) &amp;= P(\text{2 four-of-a-kind}) \cdot [1 - P_{-2}(\text{four-of-a-kind})] \\
+P(\text{exactly 2 four-of-a-kind}) &amp;= P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})] \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} \cdot [1 - \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}] \\
 &amp;= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
 \]</span>
 The most difficult term to compute is <span class="math inline">\(P(\text{exactly 1 four-of-a-kind})\)</span>. Using the same logic as above, I have</p>
 <p><span class="math display">\[
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{-1}(\text{four-of-a-kind})]
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})]
 \]</span></p>
 <p>I’ve computed the first term a couple of times throughout this article so far.</p>
 <p><span class="math display">\[
@@ -445,11 +445,11 @@ P(\text{1 four-of-a-kind})  = \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}
 \]</span></p>
 <p>When <span class="math inline">\(12 \leq n \leq 15\)</span>, <span class="math inline">\(8 \leq n-4 \leq 11\)</span> which falls into the second case. That is, there are at most 2 sets of four-of-a-kind in the residual cards. So</p>
 <p><span class="math display">\[
-P_{-1}(\text{four-of-a-kind}) = P_{-1}(\text{exactly 1 four-of-a-kind}) + P_{-1}(\text{exactly 2 four-of-a-kind})
+P_{12}(\text{four-of-a-kind}) = P_{12}(\text{exactly 1 four-of-a-kind}) + P_{12}(\text{exactly 2 four-of-a-kind})
 \]</span></p>
 <p>Following the same logic, I can get</p>
 <p><span class="math display">\[
-P_{-1}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
+P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
 \]</span></p>
 <p>Putting everything together,</p>
 <p><span class="math display">\[
@@ -459,34 +459,108 @@ P(\text{four-of-a-kind}) &amp;= P(\text{exactly 3 four-of-a-kind}) + P(\text{exa
 &amp;= \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}} \\
 &amp;= \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
+\]</span>
+The formula is now a monstrosity. But the process of deriving the formula gives me some hint at how a generalized formula might be worked out. The general idea is very simple.</p>
+<p><span class="math display">\[
+P(\text{exactly }k\text{ four-of-a-kid}) = P(k\text{ four-of-a-kind}) \cdot [1 - P_{13-k}(\text{four-of-a-kind})]
 \]</span></p>
-<pre class="r"><code>simple_prob &lt;- function(k, n, r) {
+<p>Let <span class="math inline">\(G\)</span> be a function that inputs of <span class="math inline">\(r\)</span> (i.e., how many full ranks are in the deck or remaining of the deck) and gives the probability of having at least <span class="math inline">\(k\)</span> four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
+<p><span class="math display">\[
+\begin{aligned}
+G(r, k, n) &amp;= P_{r}(k\text{ four-of-a-kind in }n\text{-card hand}) \\
+&amp;= \frac{\binom{r}{k} \cdot \binom{4r-4k}{n-4k}}{\binom{4r}{n}}
+\end{aligned}
+\]</span></p>
+<p>Let <span class="math inline">\(F\)</span> be a function that takes in an input of <span class="math inline">\(r\)</span> and gives the probability of having four-of-a-kind in an <span class="math inline">\(n\)</span>-card hand.</p>
+<p><span class="math display">\[
+F(n, r) = P_{r}(\text{four-of-a-kind in }n\text{-card hand})
+\]</span></p>
+<p>Then the generalized question becomes the following (assuming the cards are drawn from a standard 13-rank deck).</p>
+<p><span class="math display">\[
+P(\text{four-of-a-kind}) = F(n, 13)
+\]</span></p>
+<p>For the third case (i.e., <span class="math inline">\(12 \leq n \leq 15\)</span>),</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &amp;+ P(\text{exactly 2 four-of-a-kind}) \\
+&amp;+ P(\text{exactly 3 four-of-a-kind})
+\end{aligned}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{exactly 1 four-of-a-kind}) &amp;= P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})] \\
+&amp;= G(13, 1, n) \cdot [1 - F(n-4, 12)]
+\end{aligned}
+\]</span>
+<span class="math display">\[
+\begin{aligned}
+P(\text{exactly 2 four-of-a-kind}) &amp;= P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})] \\
+&amp;= G(13, 2, n) \cdot [1 - F(n-8, 11)]
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{exactly 3 four-of-a-kind}) &amp;= P(\text{3 four-of-a-kind}) \cdot [1 - P_{10}(\text{four-of-a-kind})] \\
+&amp;= G(13, 3, n) \cdot [1 - F(n-12, 10)]
+\end{aligned}
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind}) &amp;= F(n, 13) \\
+&amp;= P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 3 four-of-a-kind}) \\
+&amp;= G(13, 1, n) \cdot [1 - F(n-4, 12)] + G(13, 2, n) \cdot [1 - F(n-8, 11)] + G(13, 3, n) \cdot [1 - F(n-12, 10)]
+\end{aligned}
+\]</span>
+Generalizing <span class="math inline">\(F(n, 13)\)</span> becomes</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{four-of-a-kind}) &amp;= F(n, 13) \\
+&amp;= \sum\limits_{k=1}^{13} G(13, k, n) \cdot [1 - F(n-4k, 13-k)]
+\end{aligned}
+\]</span></p>
+<p>For this to work, <span class="math inline">\(F(n, r) = 0\)</span> for <span class="math inline">\(n \leq 3\)</span>. Once the logic is sorted out, it’s actually quite easy to code the recursive function.</p>
+<pre class="r"><code>G &lt;- function(r, k, n) {
   choose(r, k) * choose(4*r-4*k, n-4*k) / choose(4*r, n)
 }
 
-compute_has_foak &lt;- function(n, r) {
-  K &lt;- n %/% 4
-  if (K == 0) {
+F &lt;- function(n, r) {
+  if (n &lt;= 3) {
     return(0)
   }
-  res &lt;- vector(mode = &quot;numeric&quot;, length = K)
-  for (i in seq(K)) {
-    res[i] &lt;- simple_prob(i, n, r) * (1 - compute_has_foak(n-4*i, r-i))
+  res &lt;- vector(mode = &quot;numeric&quot;, length = r)
+  for (i in seq(r)) {
+    res[i] &lt;- G(r, i, n) * (1 - F(n-4*i, r-i))
   }
   sum(res)
 }</code></pre>
+<p>I first plot the results with the simulation results to see if they match.</p>
+<pre class="r"><code>df.sim %&gt;%
+  rename(p.sim = p) %&gt;%
+  mutate(p.formula = map_dbl(n, ~F(.x, r = 13))) %&gt;%
+  pivot_longer(p.sim:p.formula, names_to = &quot;type&quot;, values_to = &quot;probability&quot;) %&gt;%
+  ggplot(aes(x = n, y = probability)) +
+    geom_point(aes(color = type)) +
+    scale_x_continuous(breaks = seq(0, 50, 5)) +
+    scale_y_continuous(label = percent) +
+    facet_wrap(~type, ncol = 1) +
+    theme(legend.position = &quot;top&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>The results match the simulation very well. Out of curiosity, I plot the original and corrected results for <span class="math inline">\(n \in [0, 28]\)</span> with the formula results to see which one is “more accurate”.</p>
 <pre class="r"><code>df3 &lt;- tibble(
   n = 0:28,
-  p1 = map_dbl(n, prob1),
-  p2 = map_dbl(n, prob2),
-  p3 = map_dbl(n, ~compute_has_foak(.x, r = 13))
+  p.original = map_dbl(n, prob1),
+  p.corrected = map_dbl(n, prob2),
+  p.formula = map_dbl(n, ~F(.x, r = 13))
 )
 df3 %&gt;%
-  pivot_longer(p1:p3, names_to = &quot;type&quot;, values_to = &quot;probability&quot;) %&gt;%
+  pivot_longer(-n, names_to = &quot;type&quot;, values_to = &quot;probability&quot;) %&gt;%
   ggplot(aes(x = n, y = probability)) +
     geom_point(aes(color = type)) +
     scale_x_continuous(breaks = seq(0, 28, 1)) +
-    scale_y_continuous(label = percent)</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+    scale_y_continuous(label = percent) +
+    theme(legend.position = &quot;top&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 </div>

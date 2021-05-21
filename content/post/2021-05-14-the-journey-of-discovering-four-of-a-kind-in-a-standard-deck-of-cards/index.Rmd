@@ -464,7 +464,7 @@ $$
 I now turn my attention to the first term $P(\text{exactly 1 four-of-a-kind})$.
 
 $$
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{-1}(\text{four-of-a-kind})]
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})]
 $$
 
 where,
@@ -476,11 +476,11 @@ $$
 and
 
 $$
-P_{-1}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
+P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8}}{\binom{48}{n-4}}
 $$
 
 * $P(\text{1 four-of-a-kind})$ is the probability of having at least 1 four-of-a-kind.
-* $P_{-1}(\text{exactly 1 four-of-a-kind})$ is *the probability of having exactly 1 four-of-a-kind in the remaining 48 cards when a kind has already been drawn (hence the -1 subscript)*. When $8 \leq n \leq 11$, $4 \leq n-4 \leq 7$, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining $n-4$ cards in the hand.
+* $P_{12}(\text{four-of-a-kind})$ is *the probability of having four-of-a-kind in the remaining 48 (i.e., only 12 ranks left and hence the subscript) cards when a kind has already been drawn*. When $8 \leq n \leq 11$, $4 \leq n-4 \leq 7$, so the only possibility of having four-of-a-kind is to have exactly 1 four-of-a-kind in the remaining $n-4$ cards in the hand.
 
 Putting these all together:
 
@@ -522,7 +522,7 @@ When $12 \leq n \leq 15$, $0 \leq n-12 \leq 3$, so it's not possible to have fou
 I can deduce $P(\text{exactly 2 four-of-a-kind})$ using the same logic I used in the second case.
 
 $$
-P(\text{exactly 2 four-of-a-kind}) = P(\text{2 four-of-a-kind}) \cdot [1 - P_{-2}(\text{four-of-a-kind})]
+P(\text{exactly 2 four-of-a-kind}) = P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})]
 $$
 
 where, 
@@ -534,14 +534,14 @@ $$
 and
 
 $$
-P_{-2}(\text{four-of-a-kind}) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
+P_{11}(\text{four-of-a-kind}) = \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}
 $$
 
 So,
 
 $$
 \begin{aligned}
-P(\text{exactly 2 four-of-a-kind}) &= P(\text{2 four-of-a-kind}) \cdot [1 - P_{-2}(\text{four-of-a-kind})] \\
+P(\text{exactly 2 four-of-a-kind}) &= P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})] \\
 &= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} \cdot [1 - \frac{\binom{11}{1} \cdot \binom{40}{n-12}}{\binom{44}{n-8}}] \\
 &= \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
@@ -549,7 +549,7 @@ $$
 The most difficult term to compute is $P(\text{exactly 1 four-of-a-kind})$. Using the same logic as above, I have
 
 $$
-P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{-1}(\text{four-of-a-kind})]
+P(\text{exactly 1 four-of-a-kind}) = P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})]
 $$
 
 I've computed the first term a couple of times throughout this article so far.
@@ -561,13 +561,13 @@ $$
 When $12 \leq n \leq 15$, $8 \leq n-4 \leq 11$ which falls into the second case. That is, there are at most 2 sets of four-of-a-kind in the residual cards. So
 
 $$
-P_{-1}(\text{four-of-a-kind}) = P_{-1}(\text{exactly 1 four-of-a-kind}) + P_{-1}(\text{exactly 2 four-of-a-kind})
+P_{12}(\text{four-of-a-kind}) = P_{12}(\text{exactly 1 four-of-a-kind}) + P_{12}(\text{exactly 2 four-of-a-kind})
 $$
 
 Following the same logic, I can get
 
 $$
-P_{-1}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
+P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}
 $$
 
 Putting everything together,
@@ -580,39 +580,132 @@ P(\text{four-of-a-kind}) &= P(\text{exactly 3 four-of-a-kind}) + P(\text{exactly
 &= \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
 $$
+The formula is now a monstrosity. But the process of deriving the formula gives me some hint at how a generalized formula might be worked out. The general idea is very simple.
 
+$$
+P(\text{exactly }k\text{ four-of-a-kid}) = P(k\text{ four-of-a-kind}) \cdot [1 - P_{13-k}(\text{four-of-a-kind})]
+$$
+
+Let $G$ be a function that inputs of $r$ (i.e., how many full ranks are in the deck or remaining of the deck) and gives the probability of having at least $k$ four-of-a-kind in an $n$-card hand.
+
+$$
+\begin{aligned}
+G(r, k, n) &= P_{r}(k\text{ four-of-a-kind in }n\text{-card hand}) \\
+&= \frac{\binom{r}{k} \cdot \binom{4r-4k}{n-4k}}{\binom{4r}{n}}
+\end{aligned}
+$$
+
+Let $F$ be a function that takes in an input of $r$ and gives the probability of having four-of-a-kind in an $n$-card hand.
+
+$$
+F(n, r) = P_{r}(\text{four-of-a-kind in }n\text{-card hand})
+$$
+
+Then the generalized question becomes the following (assuming the cards are drawn from a standard 13-rank deck).
+
+$$
+P(\text{four-of-a-kind}) = F(n, 13)
+$$
+
+For the third case (i.e., $12 \leq n \leq 15$),
+
+$$
+\begin{aligned}
+P(\text{four-of-a-kind}) = P(\text{exactly 1 four-of-a-kind}) &+ P(\text{exactly 2 four-of-a-kind}) \\
+&+ P(\text{exactly 3 four-of-a-kind})
+\end{aligned}
+$$
+
+and
+
+$$
+\begin{aligned}
+P(\text{exactly 1 four-of-a-kind}) &= P(\text{1 four-of-a-kind}) \cdot [1 - P_{12}(\text{four-of-a-kind})] \\
+&= G(13, 1, n) \cdot [1 - F(n-4, 12)]
+\end{aligned}
+$$
+$$
+\begin{aligned}
+P(\text{exactly 2 four-of-a-kind}) &= P(\text{2 four-of-a-kind}) \cdot [1 - P_{11}(\text{four-of-a-kind})] \\
+&= G(13, 2, n) \cdot [1 - F(n-8, 11)]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+P(\text{exactly 3 four-of-a-kind}) &= P(\text{3 four-of-a-kind}) \cdot [1 - P_{10}(\text{four-of-a-kind})] \\
+&= G(13, 3, n) \cdot [1 - F(n-12, 10)]
+\end{aligned}
+$$
+
+So
+
+$$
+\begin{aligned}
+P(\text{four-of-a-kind}) &= F(n, 13) \\
+&= P(\text{exactly 1 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 3 four-of-a-kind}) \\
+&= G(13, 1, n) \cdot [1 - F(n-4, 12)] + G(13, 2, n) \cdot [1 - F(n-8, 11)] + G(13, 3, n) \cdot [1 - F(n-12, 10)]
+\end{aligned}
+$$
+Generalizing $F(n, 13)$ becomes
+
+$$
+\begin{aligned}
+P(\text{four-of-a-kind}) &= F(n, 13) \\
+&= \sum\limits_{k=1}^{13} G(13, k, n) \cdot [1 - F(n-4k, 13-k)]
+\end{aligned}
+$$
+
+For this to work, $F(n, r) = 0$ for $n \leq 3$. Once the logic is sorted out, it's actually quite easy to code the recursive function.
 
 ```{r}
-simple_prob <- function(k, n, r) {
+G <- function(r, k, n) {
   choose(r, k) * choose(4*r-4*k, n-4*k) / choose(4*r, n)
 }
 
-compute_has_foak <- function(n, r) {
-  K <- n %/% 4
-  if (K == 0) {
+F <- function(n, r) {
+  if (n <= 3) {
     return(0)
   }
-  res <- vector(mode = "numeric", length = K)
-  for (i in seq(K)) {
-    res[i] <- simple_prob(i, n, r) * (1 - compute_has_foak(n-4*i, r-i))
+  res <- vector(mode = "numeric", length = r)
+  for (i in seq(r)) {
+    res[i] <- G(r, i, n) * (1 - F(n-4*i, r-i))
   }
   sum(res)
 }
 ```
 
+I first plot the results with the simulation results to see if they match.
+
+```{r}
+df.sim %>%
+  rename(p.sim = p) %>%
+  mutate(p.formula = map_dbl(n, ~F(.x, r = 13))) %>%
+  pivot_longer(p.sim:p.formula, names_to = "type", values_to = "probability") %>%
+  ggplot(aes(x = n, y = probability)) +
+    geom_point(aes(color = type)) +
+    scale_x_continuous(breaks = seq(0, 50, 5)) +
+    scale_y_continuous(label = percent) +
+    facet_wrap(~type, ncol = 1) +
+    theme(legend.position = "top")
+```
+
+The results match the simulation very well. Out of curiosity, I plot the original and corrected results for $n \in [0, 28]$ with the formula results to see which one is "more accurate".
+
 ```{r}
 df3 <- tibble(
   n = 0:28,
-  p1 = map_dbl(n, prob1),
-  p2 = map_dbl(n, prob2),
-  p3 = map_dbl(n, ~compute_has_foak(.x, r = 13))
+  p.original = map_dbl(n, prob1),
+  p.corrected = map_dbl(n, prob2),
+  p.formula = map_dbl(n, ~F(.x, r = 13))
 )
 df3 %>%
-  pivot_longer(p1:p3, names_to = "type", values_to = "probability") %>%
+  pivot_longer(-n, names_to = "type", values_to = "probability") %>%
   ggplot(aes(x = n, y = probability)) +
     geom_point(aes(color = type)) +
     scale_x_continuous(breaks = seq(0, 28, 1)) +
-    scale_y_continuous(label = percent)
+    scale_y_continuous(label = percent) +
+    theme(legend.position = "top")
 ```
 
 [1]: http://www.stat.yale.edu/~pollard/Courses/241.fall97/
