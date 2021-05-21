@@ -454,10 +454,18 @@ P_{12}(\text{four-of-a-kind}) = \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \bin
 <p>Putting everything together,</p>
 <p><span class="math display">\[
 \begin{aligned}
-P(\text{four-of-a-kind}) &amp;= P(\text{exactly 3 four-of-a-kind}) + P(\text{exactly 2 four-of-a-kind}) + P(\text{exactly 1 four-of-a-kind}) \\
-&amp;= \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}] \\
-&amp;= \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}} + \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}} \\
-&amp;= \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} + \frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+P(\text{four-of-a-kind}) =\ &amp; P(\text{exactly 3 four-of-a-kind}) +\\
+&amp;P(\text{exactly 2 four-of-a-kind}) + \\
+&amp;P(\text{exactly 1 four-of-a-kind}) \\
+=\ &amp; \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}\ + \\
+&amp;\frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}\ + \\
+&amp;\frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} \cdot [1 - \frac{\binom{12}{1} \cdot \binom{44}{n-8} - \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{48}{n-4}}] \\
+=\ &amp; \frac{\binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}\ + \\
+&amp;\frac{\binom{13}{2} \cdot \binom{44}{n-8}}{\binom{52}{n}} - \frac{\binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12}}{\binom{52}{n}}\ + \\
+&amp;\frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}} - \frac{\binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} + \frac{\binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}} \\
+=\ &amp; \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}\ + \\
+&amp;\frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}\ + \\
+&amp;\frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
 \end{aligned}
 \]</span>
 The formula is now a monstrosity. But the process of deriving the formula gives me some hint at how a generalized formula might be worked out. The general idea is very simple.</p>
