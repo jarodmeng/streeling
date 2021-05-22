@@ -576,6 +576,8 @@ $$
 
 Putting everything together,
 
+<a name="third-case-formula"></a>
+
 $$
 \begin{aligned}
 \underset{12 \leq n \leq 15}P(k \geq 1, n) =\ & \underset{12 \leq n \leq 15}P(k=3, n)\ + \underset{12 \leq n \leq 15}P(k=2, n)\ + \underset{12 \leq n \leq 15}P(k=1, n) \\
@@ -718,26 +720,95 @@ df.sim %>%
     scale_y_continuous(label = percent)
 ```
 
-The results match the simulation very well.
+The results match the simulation very well. Hooray!
 
-Out of curiosity, I plot the original and corrected results for $n \in [0, 28]$ with the formula results to see which one is "more accurate".
+### Yet another generalization
+
+I was staring at the [third case solution](#third-case-formula) and realized that the terms can be simplified.
+
+$$
+\begin{aligned}
+\underset{12 \leq n \leq 15}P(k \geq 1, n) =\ & \underset{12 \leq n \leq 15}P(k=3, n)\ + \underset{12 \leq n \leq 15}P(k=2, n)\ + \underset{12 \leq n \leq 15}P(k=1, n) \\
+=\ & \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}\ + \\
+&\frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}\ + \\
+&\frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+\end{aligned}
+$$
+
+The second term $\frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}$ can be simplified as
+
+$$
+\begin{aligned}
+\frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}} &= \frac{\binom{44}{n-8}}{\binom{52}{n}} \cdot [\binom{13}{2} - \binom{13}{1} \cdot \binom{12}{1}]\\
+&= \frac{\binom{44}{n-8}}{\binom{52}{n}} \cdot [\frac{13 \cdot 12}{2} - (13 \cdot 12)]\\
+&= \frac{\binom{44}{n-8}}{\binom{52}{n}} \cdot (-\frac{13 \cdot 12}{2})\\
+&= -\frac{\binom{44}{n-8}}{\binom{52}{n}} \cdot \binom{13}{2}
+\end{aligned}
+$$
+
+I have a hunch that although the third term $\frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}$ looks scary, it can also be simplified.
+
+$$
+\begin{aligned}
+\frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}} &= \frac{\binom{40}{n-12}}{\binom{52}{n}} \cdot [\binom{13}{3} - \binom{13}{2} \cdot \binom{11}{1} + \binom{13}{1} \cdot \binom{12}{2}]\\
+&= \frac{\binom{40}{n-12}}{\binom{52}{n}} \cdot \binom{13}{3}
+\end{aligned}
+$$
+
+because
+
+$$
+\binom{13}{2} \cdot \binom{11}{1} - \binom{13}{1} \cdot \binom{12}{2} = \frac{13!}{11! \cdot 2!} \cdot \frac{11!}{10!} - \frac{13!}{12!} \cdot \frac{12!}{10! \cdot 2!} = 0
+$$
+This means that the formula can be dramatically simplified to
+
+$$
+\begin{aligned}
+\underset{12 \leq n \leq 15}P(k \geq 1, n) =\ & \underset{12 \leq n \leq 15}P(k=3, n)\ + \underset{12 \leq n \leq 15}P(k=2, n)\ + \underset{12 \leq n \leq 15}P(k=1, n) \\
+=\ & \frac{\binom{13}{1}\binom{48}{n-4}}{\binom{52}{n}}\ + \\
+&\frac{\binom{13}{2} \cdot \binom{44}{n-8} - \binom{13}{1} \cdot \binom{12}{1} \cdot \binom{44}{n-8}}{\binom{52}{n}}\ + \\
+&\frac{\binom{13}{3} \cdot \binom{40}{n-12} - \binom{13}{2} \cdot \binom{11}{1} \cdot \binom{40}{n-12} + \binom{13}{1} \cdot \binom{12}{2} \cdot \binom{40}{n-12}}{\binom{52}{n}}\\
+=\ & \frac{\binom{13}{1} \cdot \binom{48}{n-4} - \binom{13}{2} \cdot \binom{44}{n-8} + \binom{13}{3} \cdot \binom{40}{n-12}}{\binom{52}{n}}
+\end{aligned}
+$$
+
+The alternating signs of the second and third terms immediately reminded me of the [inclusion-exclusion principle][4] technique in combinatorics. I wonder if the general formula can be as simple as the following.
+
+$$
+P(k \geq 1, n) = \sum\limits_{K=1}^{13} (-1)^{K+1} \cdot \frac{\binom{13}{K} \cdot \binom{52-4K}{n-4K}}{\binom{52}{n}}
+$$
 
 ```{r}
-df3 <- tibble(
-  n = 0:28,
-  p.original = map_dbl(n, prob1),
-  p.corrected = map_dbl(n, prob2),
-  p.formula = map_dbl(n, ~F(.x, R = 13))
-)
-df3 %>%
-  pivot_longer(-n, names_to = "type", values_to = "probability") %>%
-  ggplot(aes(x = n, y = probability)) +
-    geom_point(aes(color = type)) +
-    scale_x_continuous(breaks = seq(0, 28, 1)) +
-    scale_y_continuous(label = percent) +
-    theme(legend.position = "top")
+prob3 <- function(n) {
+  sum(
+    map_dbl(
+      1:13,
+      ~(-1)^(.x+1) * choose(13, .x) * choose(52-4*.x, n-4*.x) / choose(52, n)
+    )
+  )
+}
+tibble(
+  n = 0:52,
+  p = map_dbl(n, prob3)
+) %>%
+  ggplot(aes(x = n, y = p)) +
+    geom_point()
+```
+
+I plot the results against the simulation results and they match perfectly.
+
+```{r}
+df.sim %>%
+  rename(p.sim = p) %>%
+  mutate(p.formula2 = map_dbl(n, prob3)) %>%
+  ggplot(aes(x = p.sim, y = p.formula2)) +
+    geom_point() +
+    geom_abline(aes(intercept = 0, slope = 1), color = "red", linetype = "dashed") +
+    scale_x_continuous(label = percent) +
+    scale_y_continuous(label = percent)
 ```
 
 [1]: http://www.stat.yale.edu/~pollard/Courses/241.fall97/
 [2]: http://www.stat.yale.edu/~pollard/Courses/241.fall97/Probability.pdf
 [3]: https://www.cardplayer.com/rules-of-poker/hand-rankings
+[4]: https://www.wikiwand.com/en/Inclusion%E2%80%93exclusion_principle
